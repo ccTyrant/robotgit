@@ -198,18 +198,19 @@ def BotchGetBack():
             Rotate(35 * math.pi / 180)
 
 def BotchGetBlocks():
-    while True:
-        armFrontClose()
-        Forward(5.8)
-        goToNearestMarkerInVision(tokenMarkers)
-        Forward(-2)
-        time.sleep(0.7)
-        Forward(0.2)
-        goToNearestMarkerInVision(tokenMarkers)
-        Forward(-2)
-        time.sleep(0.7)
-        Forward(0.2)
-        goToNearestMarkerInVision(tokenMarkers)
+
+    armFrontClose()
+    Forward(-5.8)
+    Rotate(math.pi)
+    goToNearestMarkerInVision(tokenMarkers)
+    Forward(-2)
+    time.sleep(0.7)
+    Forward(0.2)
+    goToNearestMarkerInVision(tokenMarkers)
+    Forward(-2)
+    time.sleep(0.7)
+    Forward(0.2)
+    goToNearestMarkerInVision(tokenMarkers)
         
 
 def getWallMarkerZoneLeft(MarkerID):
