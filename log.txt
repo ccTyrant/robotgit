@@ -19,19 +19,41 @@ gotonearestmarker
 INFO:robot.robot:New board found: '/var/robotd/camera/video0'
 do you remember gucci gang gucci gang?
 57
-rotated -0.20276420871714368 completed
-forward 1.120507799133223 completed
+rotated -0.07431687539201107 completed
+forward 1.3481397241025983 completed
 I aint seen no markers
-Forwarding till hit3.4037261302474877
-Traceback (most recent call last):
-  File "main.py", line 351, in <module>
-    BotchGetBlocks()
-  File "main.py", line 192, in BotchGetBlocks
-    goToNearestMarkerInVision(tokenMarkers)
-  File "main.py", line 128, in goToNearestMarkerInVision
-    if goToMarker(markerID):
-  File "main.py", line 157, in goToMarker
-    if ForwardTillIRHit(marker.distance_metres * 1.2):
-  File "main.py", line 74, in ForwardTillIRHit
-    if arduino.read() == PinValue.HIGH:
-NameError: name 'PinValue' is not defined
+Forwarding till hit2.019645807643798
+I done hit the marker
+forward 0.3 completed
+front
+1close
+2close
+forward -2 completed
+forward 0.2 completed
+front
+1open
+2open
+gotonearestmarker
+do you remember gucci gang gucci gang?
+55
+rotated -0.13578790460611342 completed
+forward 1.0744614339221048 completed
+55
+rotated -0.3856383609941868 completed
+forward 0.5274576119740861 completed
+I aint seen no markers
+Forwarding till hit1.6775655406473262
+I done hit the marker
+forward 0.3 completed
+front
+1close
+2close
+forward -2 completed
+forward 0.2 completed
+front
+1open
+2open
+gotonearestmarker
+front
+1close
+2close
