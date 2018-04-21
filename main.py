@@ -131,7 +131,7 @@ def goToNearestMarkerInVision(IDWhitelist):
             armFrontClose()
     else:
         Rotate(0.5)
-        goToNearestMarkerInVision()
+        goToNearestMarkerInVision(IDWhitelist)
 
 def goToMarker(markerID):
     captured = False
@@ -153,20 +153,26 @@ def goToMarker(markerID):
                 else:
                     print("going for it")
                     Rotate(ourMarker.spherical.rot_y_radians)
+                    armFrontOpen()
                     if ForwardTillIRHit(ourMarker.spherical.distance_metres * 1.2):
                         time.sleep(0.5)
                         Forward(0.3)
                         captured = True
+                        armFrontClose()
                     else:
                         break
+                    armFrontClose()
             else:
                 print("I aint seen no markers")
+                armFrontOpen()
                 if ForwardTillIRHit(marker.distance_metres * 1.2):
                     captured = True
                     time.sleep(0.5)
                     Forward(0.3)
+                    armFrontClose()
                 else:
                     break
+                armFrontClose()
         else:
             print("notseen")
             Forward(-0.5)
@@ -194,18 +200,15 @@ def BotchGetBack():
 def BotchGetBlocks():
     while True:
         armFrontClose()
-        Forward(4)
-        armFrontOpen()
+        Forward(5.8)
         goToNearestMarkerInVision(tokenMarkers)
         Forward(-2)
         time.sleep(0.7)
         Forward(0.2)
-        armFrontOpen()
         goToNearestMarkerInVision(tokenMarkers)
         Forward(-2)
         time.sleep(0.7)
         Forward(0.2)
-        armFrontOpen()
         goToNearestMarkerInVision(tokenMarkers)
         
 
