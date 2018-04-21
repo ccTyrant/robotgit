@@ -187,7 +187,7 @@ def BotchGetBack():
     inZone = False
     while not inZone:
         wallMarkers = GetAllMarkersInVision(leftWallMarkers + rightWallMarkers)
-        if wallMarkers.count > 0:
+        if len(wallMarkers) > 0:
             selectedMarker = wallMarkers[0]
             Rotate(selectedMarker.spherical.rot_y_radians)
             Forward(selectedMarker.spherical.dist * 0.7)
@@ -202,7 +202,7 @@ def BotchGetBack():
         else:
             Rotate(35 * math.pi / 180)
             Forward(2)
-            inZone = True
+            inZone = False
 
 def BotchGetBlocks():
 
@@ -318,6 +318,7 @@ def armFrontClose():
     print("1close")
     LeftArm.position = -0.5
     print("2close")
+    time.sleep(0.1)
 
 def armFrontOpen():
     print("front")
@@ -325,6 +326,7 @@ def armFrontOpen():
     print("1open")
     LeftArm.position = 0.4
     print("2open")
+    time.sleep(0.1)
 
 
 def wallace():
