@@ -1,11 +1,7 @@
-#simple change
-#another simple change
-
 from robot import Robot
 from robot import BRAKE, COAST
-from robot import WALL, TOKEN_ZONE_0,TOKEN_ZONE_1, TOKEN_ZONE_2, TOKEN_ZONE_3
+from robot import WALL, TOKEN_ZONE_0,TOKEN_ZONE_1, TOKEN_ZONE_2, TOKEN_ZONE_3, TOKEN
 import time
-import datetime
 from time import sleep
 import math
 from robot import PinMode, PinValue
@@ -13,8 +9,26 @@ r = Robot()
 board = r.servo_board
 zone = 2
 IRPin = 0
-forwardConst = 2.2
 
+errorMarkerID = 6969
+errorMarkerDistance = 4201337
+
+#Arduino Pin Numbers
+from robot import PinMode
+armBack1pos = 3
+armBack1neg = 2
+armBack2pos = 5
+armBack2neg = 4
+
+#Servos
+RightArm = r.servo_board.servos[1]
+LeftArm = r.servo_board.servos[2]
+camera = r.servo_board.servos[0]
+arduino = r.servo_board.gpios[2]
+arduino.pin_mode = PinMode.INPUT
+
+
+#tokenMarkers
 if zone == 0:
     tokenMarkers = list(TOKEN_ZONE_0)
     leftWallMarkers = [41,42]
@@ -34,45 +48,39 @@ elif zone == 3:
     leftWallMarkers = [36,37]
     rightWallMarkers = [40,41]
 
-errorMarkerID = 6969
-errorMarkerDistance = 4201337
+leftPower = -0.61
+rightPower = -0.67
 
-arduino = r.servo_board.gpios[2]
-arduino.pin_mode = PinMode.INPUT
-
-#TERMINOLOGY
-#FRONT and BACK are constant for the robot
-#FORWARD is the direction in which the camera is facing
-
-#Arduino Pin Numbers
-from robot import PinMode
-armBack1pos = 3
-armBack1neg = 2#right is pin 1 left is pin to
-armBack2pos = 5
-armBack2neg = 4
-
-#Servos
-RightServo = r.servo_board.servos[1]
-LeftServo = r.servo_board.servos[2]
-camera = r.servo_board.servos[0]
-
-leftPower = -0.72
-rightPower = -0.75
-
-forward = True
+fconst = 2.2
 
 def Forward(dist):
-        if dist > 0:
-            r.motor_board.m1 = leftPower
-            r.motor_board.m0 = rightPower
-        else:
-            r.motor_board.m1 = -leftPower
-            r.motor_board.m0 = -rightPower
-        time.sleep(abs(dist * forwardConst))
-        r.motor_board.m1 = BRAKE
-        r.motor_board.m0 = BRAKE
-        print("forward " + str(dist) + " completed")
-        time.sleep(0.3)
+    if dist > 0:
+        r.motor_board.m1 = leftPower
+        r.motor_board.m0 = rightPower
+    else:
+        r.motor_board.m1 = -leftPower
+        r.motor_board.m0 = -rightPower
+    time.sleep(abs(dist * fconst))
+    r.motor_board.m1 = BRAKE
+    r.motor_board.m0 = BRAKE
+    print("forward " + str(dist) + " completed")
+    time.sleep(0.2)
+
+def ForwardTillIRHit(maxDist):#returns true if the IR has gone off, false if maxdist reached
+    endTime = time.time() + fconst * maxDist
+    r.motor_board.m1 = leftPower
+    r.motor_board.m0 = rightPower
+    print("Forwarding till hit" + str(maxDist))
+    while time.time() < endTime:
+        if arduino.read() == PinValue.HIGH:
+            r.motor_board.m1 = BRAKE
+            r.motor_board.m0 = BRAKE
+            print("I done hit the marker")
+            return True
+    r.motor_board.m1 = BRAKE
+    r.motor_board.m0 = BRAKE
+    print("I NO hit marker")
+    return False
 
 def Rotate(ang):
        const = 0.2
@@ -86,7 +94,7 @@ def Rotate(ang):
        r.motor_board.m1 = BRAKE
        r.motor_board.m0 = BRAKE
        print("rotated " + str(ang) + " completed")
-       time.sleep(0.3)
+       time.sleep(0.2)
 
 def lookAndGo():
     markers = r.camera.see()
@@ -100,10 +108,10 @@ def lookAndGo():
                 break
 def GetAllMarkersInVision(IDWhitelist):
     markers = r.camera.see()
-    markersSelected = ()
+    markersSelected = []
     for x in markers:
         if x.id in IDWhitelist:
-            markersSelected = markersSelected + (x,)
+            markersSelected = markersSelected + [x]
     return markersSelected
 
 def GetNearestMarkerInVision(IDWhitelist):
@@ -114,17 +122,17 @@ def GetNearestMarkerInVision(IDWhitelist):
     return errorMarkerID
 
 def goToNearestMarkerInVision(IDWhitelist):
+    print("gotonearestmarker")
     markerID = GetNearestMarkerInVision(IDWhitelist)
     if markerID != errorMarkerID:
         print("do you remember gucci gang gucci gang?")
         if goToMarker(markerID):
             armFrontClose()
 
-
 def goToMarker(markerID):
     captured = False
-    markerSeen = False
     while not captured:
+        markerSeen = False
         markers = r.camera.see()
         if len(markers) != 0:
             for marker in markers:
@@ -153,118 +161,154 @@ def goToMarker(markerID):
                     Forward(0.3)
                 else:
                     break
+        else:
+            print("notseen")
+            Forward(-0.5)
     return captured
 
-def ForwardTillIRHit(maxDist):#returns true if the IR has gone off, false if maxdist reached
-    endTime = time.time() + forwardConst * maxDist
-    r.motor_board.m1 = leftPower
-    r.motor_board.m0 = rightPower
-    print("Forwarding till hit" + str(maxDist))
-    while time.time() < endTime:
-        if arduino.read() == PinValue.HIGH:
-            r.motor_board.m1 = BRAKE
-            r.motor_board.m0 = BRAKE
-            print("I done hit the marker")
-            return True
-    r.motor_board.m1 = BRAKE
-    r.motor_board.m0 = BRAKE
-    print("I NO hit marker")
-    return False
+def BotchGetBack():
+    inZone = False
+    while not inZone:
+        wallMarkers = GetAllMarkersInVision(leftWallMarkers + rightWallMarkers)
+        if wallMarkers.count > 0:
+            selectedMarker = wallMarkers[0]
+            Rotate(selectedMarker.spherical.rot_y_radians)
+            Forward(selectedMarker.spherical.dist * 0.7)
+            if selectedMarker in rightWallMarkers:
+                Rotate(-35 * math.pi / 180)
+                Forward(2)
+                inZone = True
+            else:
+                Rotate(35 * math.pi / 180)
+                Forward(2)
+                inZone = True
+        else:
+            Rotate(35 * math.pi / 180)
 
-def IRSensorCheck():
-    pass
-            
-#def getWallMarkerZoneLeft(marker):
+def BotchGetBlocks():
+    while True:
+        armFrontClose()
+        Forward(4)
+        armFrontOpen()
+        goToNearestMarkerInVision(tokenMarkers)
+        Forward(-2)
+        time.sleep(0.7)
+        Forward(0.2)
+        armFrontOpen()
+        goToNearestMarkerInVision(tokenMarkers)
+        Forward(-2)
+        time.sleep(0.7)
+        Forward(0.2)
+        armFrontOpen()
+        goToNearestMarkerInVision(tokenMarkers)
+        
+
+def getWallMarkerZoneLeft(MarkerID):
+    if MarkerID in range(0,7): 
+        return 0
+    elif MarkerID in range (7,14):
+        return 1
+    elif MarkerID in range(14,21):
+        return 2
+    elif MarkerID in range(21,28):
+        return 3
+    else:
+        return errorMarkerID
+
+def getPosition():
+    wallMarkers = GetAllMarkersInVision(list(WALL))
+    if wallMarkers.count >=2:
+        markerA = wallMarkers[0]
+        markerB = wallMarkers[1]
+        alpha = markerA.spheical.rot_y_radians
+        beta = markerB.spheical.rot_y_radians
+        a = markerA.spheical.distance_metres
+        b = markerB.spheical.distance_metres
+        Ax = GetWallMarkerX(markerA.id)
+        Ay = GetWallMarkerY(markerA.id)
+        Bx = GetWallMarkerX(markerB.id)
+        By = GetWallMarkerY(markerB.id)
+        phi = beta-alpha
+        BAx = Bx-Ax
+        BAy = By-Ay
+        magBA = BAx*BAx+BAy*BAy 
+
+        tanDelta = (b/a)*(1/math.sin(phi))-(1/math.tan(phi))
+        sinDelta = tanDelta/math.sqrt((tanDelta*tanDelta)+1)
+        cosDelta = 1//math.sqrt((tanDelta*tanDelta)+1)
+
+        phatx = BAx/magBA
+        phaty = BAy/magBA
+        rhatx = -phaty
+        rhaty = phatx
+
+        Rx = Bx + phatx*b*sinDelta + rhatx*b*cosDelta
+        Ry = By + phaty*b*sinDelta + rhaty*b*cosDelta
+        return [Rx,Ry]
+    else:
+        Rotate(-1)
+        return getPosition()
+
+def GetWallMarkerX(markid):
+    if markid in range(7,14):
+        return 8
+    elif markid in range(21,28):
+        return 0
+    elif markid in range(0,7):
+        return (markid + 1)
+    elif markid in range(14,21):
+        return (21-markid)
+    else:
+        return errorMarkerDistance
+
+def GetWallMarkerY(markid):
+    if markid in range(0,7):
+        return 0
+    elif markid in range(14,21):
+        return 8
+    elif markid in range(7,14):
+        return (markid - 6)
+    elif markid in range(21,28):
+        return (28-markid)
+    else:
+        return errorMarkerDistance
 
 def returnToZone():
-    pass
-
-#def cameraLook(ang):
-#    cameraAngle(ang)
-#    markers=r.camera.see()
-#    TokenMarkerSeen = ()
-#    WallSeen = ()
-#    if len(markers) !=0:
-#        for m in markers:
-#            print("Marker Object Type: " , type(marker))
-#            print("Marker: " + str(marker.id))
-#            if marker.is_token_marker():
-#                TokenMarkerSeen = TokenMarkerSeen + (marker,)
-#            elif marker.is_wall_marker():
-#                WallSeen = WallSeen + (marker,)
-#    TokensSeen = ()
-#    TokenIDSeen = ()
-#    for m in TokenMarkerSeen:
-#        if not TokenIDSeen.__contains__(m.id):
-#            TokenIDSeen = TokenIDSeen + (m.id, )
-#            TokensSeen = TokensSeen + (m, )
-            
-    
-    
-
+    markers = r.camera.see()
+    markersNearZoneRight = []
+    markersNearZoneLeft = []
+    markersFarFromZone = []
+    if len(markers) != 0:
+        for x in markers:
+            if getWallMarkerZoneLeft(x.id) == zone:
+                markersNearZoneRight = markersNearZoneRight + [x]
+            if (getWallMarkerZoneLeft(x.id) +1)%4 == zone :
+                markersNearZoneLeft = markersNearZoneLeft + [x]
+            else:
+                markersFarFromZone = markersFarFromZone + [x]
+        if markersNearZoneRight.count != 0 or markersNearZoneLeft.count != 0:
+            pass        
+        else:
+            Rotate(-1)
+            returnToZone()
+    else:
+        Rotate(-1)
+        returnToZone()
 
 def armFrontClose():
     print("front")
-    RightServo.position = 0.35
+    RightArm.position = 0.4
     print("1close")
-    LeftServo.position = -0.53
+    LeftArm.position = -0.5
     print("2close")
 
 def armFrontOpen():
     print("front")
-    RightServo.position = -0.5
+    RightArm.position = -0.5
     print("1open")
-    LeftServo.position = 0.4
+    LeftArm.position = 0.4
     print("2open")
 
-#def armBackOpen():
-    #print("back")
-    #board.gpios[armBack1pos].mode = PinMode.OUTPUT_HIGH
-    #board.gpios[armBack1neg].mode = PinMode.OUTPUT_LOW
-    #board.gpios[armBack2pos].mode = PinMode.OUTPUT_HIGH
-    #board.gpios[armBack2neg].mode = PinMode.OUTPUT_LOW
-    #time.sleep(0.2)
-    #board.gpios[armBack1pos].mode = PinMode.OUTPUT_LOW
-    #board.gpios[armBack1neg].mode = PinMode.OUTPUT_LOW
-    #board.gpios[armBack2pos].mode = PinMode.OUTPUT_LOW
-    #board.gpios[armBack2neg].mode = PinMode.OUTPUT_LOW
-    #print("open")
-
-#def armBackClose():
-    #print("back")
-    #board.gpios[armBack1pos].mode = PinMode.OUTPUT_LOW
-    #board.gpios[armBack1neg].mode = PinMode.OUTPUT_HIGH
-    #board.gpios[armBack2pos].mode = PinMode.OUTPUT_LOW
-    #board.gpios[armBack2neg].mode = PinMode.OUTPUT_HIGH
-    #time.sleep(0.2)
-    #board.gpios[armBack1pos].mode = PinMode.OUTPUT_LOW
-    #board.gpios[armBack1neg].mode = PinMode.OUTPUT_LOW
-    #board.gpios[armBack2pos].mode = PinMode.OUTPUT_LOW
-    #board.gpios[armBack2neg].mode = PinMode.OUTPUT_LOW
-    #print("close")
-
-#def armForwardOpen():
-    #if(forward):
-        #armFrontOpen()
-    #else:
-        #armBackOpen()
-
-#def armForwardClose():
-    #if(forward):
-        #armFrontClose()
-    #else:
-        #armBackClose()
-
-#def cameraAngle(ang):
-    #const = 0.5/math.pi
-    #pos = const * ang
-    #if(pos<=0.6 and pos>=-0.6):
-        #camera.position = const * ang
-        #time.sleep(0.5)
-        #print("it worked good")
-    #else:
-        #print("servo is a knob")
-        #wallace()
 
 def wallace():
     r.power_board.buzz(0.4, note='g')
@@ -300,98 +344,11 @@ def wallace():
     r.power_board.buzz(0.2, note='c')
     r.power_board.buzz(0.2, note='g')
     r.power_board.buzz(0.2, note='c')
-def BotchGetBack():
-    inZone = False
-    while not inZone:
-        wallMarkers = GetAllMarkersInVision(leftWallMarkers + rightWallMarkers)
-        if wallMarkers.count > 0:
-            selectedMarker = wallMarkers[0]
-            Rotate(selectedMarker.spherical.rot_y_radians)
-            Forward(selectedMarker.spherical.dist * 0.7)
-            if selectedMarker in rightWallMarkers:
-                Rotate(-35 * math.pi / 180)
-                Forward(2)
-                inZone = True
-            else:
-                Rotate(35 * math.pi / 180)
-                Forward(2)
-                inZone = True
-        else:
-            Rotate(35 * math.pi / 180)
-
-def BotchGetBlocks():
-    while True:
-        armFrontClose()
-        Forward(4)
-        goToNearestMarkerInVision(tokenMarkers)
-        Forward(-2)
-        time.sleep(0.7)
-        Forward(0.2)
-        armFrontOpen()
-        goToNearestMarkerInVision(tokenMarkers)
-        Forward(-2)
-        time.sleep(0.7)
-        Forward(0.2)
-        armFrontOpen()
-        goToNearestMarkerInVision(tokenMarkers)
-        
-def GetViewOnBlocks():
-    pass
-
-
 
 
 print("THIS IS TOTALLY RUNNING")
+
+
 BotchGetBlocks()
 Rotate(100 * math.pi / 180)
 BotchGetBack()
-
-#cameraAngle(0)
-    #cameraAngle(math.pi)
-    #print("+")
-    #camera.position = 0.6
-    #time.sleep(2)
-    #print("-")
-    #camera.position = -0.6
-    #time.sleep(2)
-#     lookAndGo()
-#    #wallace()
-     #armFrontOpen()
-     #time.sleep(1)
-     #armFrontClose()
-     #time.sleep(1) 
-
-#    #Rotate(3.1415926)
-#    #print("SLEEP")
-#    #time.sleep(4)
-
-#    armForwardOpen()
- #   sleep(2)
-  #  print ("Open")
-   # armForwardClose()
-    #print ("Closed")
-    #sleep(2)
-
- #while True:
- #    arm0.position = 0
- #    r.power_board.buzz(1, note = 'c')
- #    print("1")
- #    time.sleep(2)
- #    arm0.position = 0.4
- #    r.power_board.buzz(0.5, note = 'g')
- #    print("2")
- #    time.sleep(2)
-
- #while True:
- #    board.gpios[2].mode = PinMode.OUTPUT_HIGH
- #    board.gpios[3].mode = PinMode.OUTPUT_LOW
- #    time.sleep(0.2)
- #    board.gpios[2].mode = PinMode.OUTPUT_LOW
- #    board.gpios[3].mode = PinMode.OUTPUT_LOW
- #    time.sleep(0.2)
- #    board.gpios[2].mode = PinMode.OUTPUT_LOW
- #    board.gpios[3].mode = PinMode.OUTPUT_HIGH
- #    time.sleep(0.2)
- #    board.gpios[2].mode = PinMode.OUTPUT_LOW
- #    board.gpios[3].mode = PinMode.OUTPUT_LOW
- #    time.sleep(0.2)
