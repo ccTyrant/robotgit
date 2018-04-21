@@ -1,4 +1,4 @@
-Script started on Wed Nov 29 02:37:12 2017
+Script started on Wed Nov 29 02:37:11 2017
 INFO:robot.robot:Robot (v2018.3.0) Initialising...
 INFO:robot.robot:New board found: '/var/robotd/power/SB_PB_O'
 INFO:robot.power:Waiting for start button.
@@ -19,49 +19,23 @@ gotonearestmarker
 INFO:robot.robot:New board found: '/var/robotd/camera/video0'
 do you remember gucci gang gucci gang?
 54
-rotated -0.044966679405987184 completed
-forward 1.3619649969261418 completed
-I aint seen no markers
-Forwarding till hit1.5473799869847138
-I done hit the marker
-forward 0.3 completed
-front
-1close
-2close
-forward -2 completed
-forward 0.2 completed
-front
-1open
-2open
-gotonearestmarker
-forward -2 completed
-forward 0.2 completed
-front
-1open
-2open
-gotonearestmarker
-do you remember gucci gang gucci gang?
-57
-rotated 0.12653763340918292 completed
-forward 0.9424972612364498 completed
+rotated -0.20786496658637146 completed
+forward 0.9901262219387417 completed
+54
+rotated -0.02970597404454001 completed
+forward 0.4606222947186195 completed
 notseen
 forward -0.5 completed
-57
-rotated 0.022134840967709995 completed
-forward 0.6700629111701069 completed
-57
-rotated -0.26207939084115617 completed
-Forwarding till hit0.6502635692004402
-I done hit the marker
-forward 0.3 completed
-front
-1close
-2close
-front
-1close
-2close
-forward 4 completed
-front
-1open
-2open
-gotonearestmarker
+54
+rotated -0.09886556396928525 completed
+forward 0.44832807779500927 completed
+notseen
+forward -0.5 completed
+54
+rotated -0.04942389282477135 completed
+forward 0.47140634748583204 completed
+notseen
+forward -0.5 completed
+notseen
+forward -0.5 completed
+54

@@ -48,7 +48,8 @@ elif zone == 3:
     leftWallMarkers = [36,37]
     rightWallMarkers = [40,41]
 
-leftPower = -0.61
+##wrong way around
+leftPower = -0.7
 rightPower = -0.67
 
 fconst = 2.2
