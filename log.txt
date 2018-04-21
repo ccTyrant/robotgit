@@ -1,4 +1,4 @@
-Script started on Wed Nov 29 02:37:11 2017
+Script started on Wed Nov 29 02:37:12 2017
 INFO:robot.robot:Robot (v2018.3.0) Initialising...
 INFO:robot.robot:New board found: '/var/robotd/power/SB_PB_O'
 INFO:robot.power:Waiting for start button.
@@ -15,24 +15,19 @@ forward -5.8 completed
 rotated 3.141592653589793 completed
 gotonearestmarker
 INFO:robot.robot:New board found: '/var/robotd/camera/video0'
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
+do you remember gucci gang gucci gang?
+56
+closing distance
+rotated 0.027056148116825433 completed
+forward 0.7831622808350968 completed
+notseen
+forward -0.5 completed
+56
+closing distance
+rotated -0.12081093749581856 completed
+forward 0.6067766152279084 completed
+notseen
+forward -0.5 completed
+56
+closing distance
+rotated -0.0495974271984785 completed

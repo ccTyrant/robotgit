@@ -7,7 +7,7 @@ import math
 from robot import PinMode, PinValue
 r = Robot()
 board = r.servo_board
-zone = 0
+zone = 2
 IRPin = 0
 
 errorMarkerID = 6969
@@ -131,6 +131,7 @@ def goToNearestMarkerInVision(IDWhitelist):
             armFrontClose()
     else:
         Rotate(0.5)
+        time.sleep(0.5)
         goToNearestMarkerInVision(IDWhitelist)
 
 def goToMarker(markerID):
