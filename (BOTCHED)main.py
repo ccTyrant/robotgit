@@ -23,6 +23,9 @@ armBack2neg = 4
 RightArm = r.servo_board.servos[1]
 LeftArm = r.servo_board.servos[2]
 camera = r.servo_board.servos[0]
+arduino = r.servo_board.gpios[2]
+arduino.pin_mode = PinMode.INPUT
+
 
 #tokenMarkers
 if zone == 0:
@@ -44,7 +47,7 @@ elif zone == 3:
     leftWallMarkers = [36,37]
     rightWallMarkers = [40,41]
 
-leftPower = -0.63
+leftPower = -0.61
 rightPower = -0.65
 
 fconst = 2.2
