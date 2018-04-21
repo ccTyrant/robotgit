@@ -53,18 +53,18 @@ elif zone == 3:
     rightWallMarkers = [40,41]
 
 ##wrong way around
-leftPower = -0.7
-rightPower = -0.65
+rPow = -0.7
+lPow = -0.68
 
 fconst = 2.2
 
 def Forward(dist):
     if dist > 0:
-        r.motor_board.m1 = leftPower
-        r.motor_board.m0 = rightPower
+        r.motor_board.m1 = rPow
+        r.motor_board.m0 = lPow
     else:
-        r.motor_board.m1 = -leftPower
-        r.motor_board.m0 = -rightPower
+        r.motor_board.m1 = -rPow
+        r.motor_board.m0 = -lPow
     time.sleep(abs(dist * fconst))
     r.motor_board.m1 = BRAKE
     r.motor_board.m0 = BRAKE
@@ -73,8 +73,8 @@ def Forward(dist):
 
 def ForwardTillIRHit(maxDist):#returns true if the IR has gone off, false if maxdist reached
     endTime = time.time() + fconst * maxDist
-    r.motor_board.m1 = leftPower
-    r.motor_board.m0 = rightPower
+    r.motor_board.m1 = rPow
+    r.motor_board.m0 = lPow
     print("Forwarding till hit" + str(maxDist))
     while time.time() < endTime:
         if arduino.read() == PinValue.HIGH:
@@ -90,11 +90,11 @@ def ForwardTillIRHit(maxDist):#returns true if the IR has gone off, false if max
 def Rotate(ang):
        const = 0.3
        if ang < 0:
-           r.motor_board.m1 = leftPower
-           r.motor_board.m0 = -rightPower
+           r.motor_board.m1 = rPow
+           r.motor_board.m0 = -lPow
        else:
-           r.motor_board.m1 = -leftPower
-           r.motor_board.m0 = rightPower
+           r.motor_board.m1 = -rPow
+           r.motor_board.m0 = lPow
        time.sleep(abs(ang * const))
        r.motor_board.m1 = BRAKE
        r.motor_board.m0 = BRAKE

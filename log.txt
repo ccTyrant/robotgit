@@ -1,4 +1,4 @@
-Script started on Wed Nov 29 02:37:37 2017
+Script started on Wed Nov 29 02:37:42 2017
 INFO:robot.robot:Robot (v2018.3.0) Initialising...
 INFO:robot.robot:New board found: '/var/robotd/power/SB_PB_O'
 INFO:robot.power:Waiting for start button.
@@ -15,20 +15,22 @@ forward -5.8 completed
 rotated 3.141592653589793 completed
 gotonearestmarker
 INFO:robot.robot:New board found: '/var/robotd/camera/video0'
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
 do you remember gucci gang gucci gang?
-I aint seen no markers
+50
+closing distance
+rotated 0.4669973653765964 completed
+forward 1.5153565557600293 completed
+50
+closing distance
+rotated 0.1928962524396245 completed
+forward 0.6960227736265279 completed
+50
+going for it
+rotated -0.029741045095191855 completed
 front
 1open
 2open
-Forwarding till hit7.822096462250999
+Forwarding till hit0.6704983964826068
 I done hit the marker
 forward 0.3 completed
 front
@@ -42,99 +44,45 @@ front
 2close
 forward -2 completed
 forward 0.2 completed
-gotonearestmarker
-do you remember gucci gang gucci gang?
-53
-closing distance
-rotated -0.11629606167995311 completed
-forward 2.0814203664701965 completed
-53
-closing distance
-rotated 0.36545391599109117 completed
-forward 1.07869910827703 completed
-53
-closing distance
-rotated 0.24577656753426994 completed
-forward 0.5402039441054216 completed
-I aint seen no markers
-front
-1open
-2open
-Forwarding till hit2.0787094724198787
-I done hit the marker
-forward 0.3 completed
-front
-1close
-2close
-front
-1close
-2close
-front
-1close
-2close
-forward -2 completed
-forward 0.2 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
 gotonearestmarker
 do you remember gucci gang gucci gang?
 50
 closing distance
-rotated 0.05044603530358005 completed
-forward 1.4506109810760257 completed
-I aint seen no markers
+rotated -0.2724115449159592 completed
+forward 0.8610861595363475 completed
+50
+going for it
+rotated -0.009908737286868651 completed
 front
 1open
 2open
-Forwarding till hit6.521894244836593
+Forwarding till hit0.8401114279275369
+I done hit the marker
+forward 0.3 completed
+front
+1close
+2close
+front
+1close
+2close
+front
+1close
+2close
+forward -2 completed
+forward 0.2 completed
+gotonearestmarker
+do you remember gucci gang gucci gang?
+50
+closing distance
+rotated -0.342159755205498 completed
+forward 0.8706070900357022 completed
+50
+going for it
+rotated -0.09041445342407957 completed
+front
+1open
+2open
+Forwarding till hit0.8419408063569314
 I done hit the marker
 forward 0.3 completed
 front
