@@ -7,7 +7,7 @@ import math
 from robot import PinMode, PinValue
 r = Robot()
 board = r.servo_board
-zone = 2
+zone = 0
 IRPin = 0
 
 errorMarkerID = 6969
@@ -129,6 +129,9 @@ def goToNearestMarkerInVision(IDWhitelist):
         print("do you remember gucci gang gucci gang?")
         if goToMarker(markerID):
             armFrontClose()
+    else:
+        Rotate(0.5)
+        goToNearestMarkerInVision()
 
 def goToMarker(markerID):
     captured = False
@@ -143,10 +146,12 @@ def goToMarker(markerID):
                     ourMarker = marker
                     break
             if markerSeen:
-                if ourMarker.distance_metres > 0.7:
+                if ourMarker.distance_metres > 0.9:
+                    print("closing distance")
                     Rotate(ourMarker.spherical.rot_y_radians)
                     Forward(ourMarker.spherical.distance_metres * 0.6)
                 else:
+                    print("going for it")
                     Rotate(ourMarker.spherical.rot_y_radians)
                     if ForwardTillIRHit(ourMarker.spherical.distance_metres * 1.2):
                         time.sleep(0.5)
