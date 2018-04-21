@@ -1,9 +1,9 @@
-Script started on Wed Nov 29 02:37:12 2017
+Script started on Wed Nov 29 02:37:37 2017
 INFO:robot.robot:Robot (v2018.3.0) Initialising...
 INFO:robot.robot:New board found: '/var/robotd/power/SB_PB_O'
 INFO:robot.power:Waiting for start button.
 INFO:robot.robot:New board found: '/var/robotd/game/state'
-INFO:robot.robot:Recieved start signal in development mode, zone 0
+INFO:robot.robot:Recieved start signal in competition mode, zone 1
 INFO:robot.power:Starting user code.
 INFO:robot.robot:New board found: '/var/robotd/servo_assembly/8553130383035171D001'
 THIS IS TOTALLY RUNNING
@@ -15,19 +15,141 @@ forward -5.8 completed
 rotated 3.141592653589793 completed
 gotonearestmarker
 INFO:robot.robot:New board found: '/var/robotd/camera/video0'
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
 do you remember gucci gang gucci gang?
-56
+I aint seen no markers
+front
+1open
+2open
+Forwarding till hit7.822096462250999
+I done hit the marker
+forward 0.3 completed
+front
+1close
+2close
+front
+1close
+2close
+front
+1close
+2close
+forward -2 completed
+forward 0.2 completed
+gotonearestmarker
+do you remember gucci gang gucci gang?
+53
 closing distance
-rotated 0.027056148116825433 completed
-forward 0.7831622808350968 completed
-notseen
-forward -0.5 completed
-56
+rotated -0.11629606167995311 completed
+forward 2.0814203664701965 completed
+53
 closing distance
-rotated -0.12081093749581856 completed
-forward 0.6067766152279084 completed
-notseen
-forward -0.5 completed
-56
+rotated 0.36545391599109117 completed
+forward 1.07869910827703 completed
+53
 closing distance
-rotated -0.0495974271984785 completed
+rotated 0.24577656753426994 completed
+forward 0.5402039441054216 completed
+I aint seen no markers
+front
+1open
+2open
+Forwarding till hit2.0787094724198787
+I done hit the marker
+forward 0.3 completed
+front
+1close
+2close
+front
+1close
+2close
+front
+1close
+2close
+forward -2 completed
+forward 0.2 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+rotated 0.5 completed
+gotonearestmarker
+do you remember gucci gang gucci gang?
+50
+closing distance
+rotated 0.05044603530358005 completed
+forward 1.4506109810760257 completed
+I aint seen no markers
+front
+1open
+2open
+Forwarding till hit6.521894244836593
+I done hit the marker
+forward 0.3 completed
+front
+1close
+2close
+front
+1close
+2close
+front
+1close
+2close
+rotated 1.7453292519943295 completed
+Traceback (most recent call last):
+  File "main.py", line 371, in <module>
+    BotchGetBack()
+  File "main.py", line 190, in BotchGetBack
+    if wallMarkers.count > 0:
+TypeError: unorderable types: builtin_function_or_method() > int()

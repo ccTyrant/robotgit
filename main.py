@@ -1,13 +1,17 @@
 from robot import Robot
 from robot import BRAKE, COAST
 from robot import WALL, TOKEN_ZONE_0,TOKEN_ZONE_1, TOKEN_ZONE_2, TOKEN_ZONE_3, TOKEN
+from robot import GameMode
 import time
 from time import sleep
 import math
 from robot import PinMode, PinValue
 r = Robot()
 board = r.servo_board
-zone = 2
+if r.mode == GameMode.COMPETITION:
+    zone = r.zone
+else:
+    zone = 2
 IRPin = 0
 
 errorMarkerID = 6969
@@ -50,7 +54,7 @@ elif zone == 3:
 
 ##wrong way around
 leftPower = -0.7
-rightPower = -0.67
+rightPower = -0.65
 
 fconst = 2.2
 
@@ -84,7 +88,7 @@ def ForwardTillIRHit(maxDist):#returns true if the IR has gone off, false if max
     return False
 
 def Rotate(ang):
-       const = 0.2
+       const = 0.3
        if ang < 0:
            r.motor_board.m1 = leftPower
            r.motor_board.m0 = -rightPower
@@ -197,6 +201,8 @@ def BotchGetBack():
                 inZone = True
         else:
             Rotate(35 * math.pi / 180)
+            Forward(2)
+            inZone = True
 
 def BotchGetBlocks():
 
