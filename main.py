@@ -466,8 +466,8 @@ def getPositionAndRotation():
 		#unit vectors
         phatx = BAx / magBA
         phaty = BAy / magBA
-        rhatx = -phaty
-        rhaty = phatx
+        rhatx = phaty
+        rhaty = -phatx
 
 		#robot position
         Rx = Bx + phatx * b * sinDelta + rhatx * b * cosDelta
