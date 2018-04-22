@@ -451,8 +451,8 @@ def getPositionAndRotation():
         By = GetWallMarkerY(markerB.id)
 		#derived info
         phi = beta - alpha
-        BAx = Bx - Ax
-        BAy = By - Ay
+        BAx = Ax-Bx
+        BAy = Ay-By
         magBA = BAx * BAx + BAy * BAy
 
         print("phi=" + str(phi) + " a=" + str(a) + " b=" + str(b))
