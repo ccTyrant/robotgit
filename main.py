@@ -1,6 +1,6 @@
 from robot import Robot
 from robot import BRAKE, COAST
-from robot import WALL, TOKEN_ZONE_0,TOKEN_ZONE_1, TOKEN_ZONE_2, TOKEN_ZONE_3, TOKEN
+from robot import WALL, TOKEN_ZONE_0,TOKEN_ZONE_1, TOKEN_ZONE_2, TOKEN_ZONE_3, TOKEN, COLUMN
 from robot import GameMode
 import time
 from time import sleep
@@ -16,6 +16,8 @@ IRPin = 0
 
 errorMarkerID = 6969
 errorMarkerDistance = 4201337
+
+columnWidth = 0.37
 
 #Arduino Pin Numbers
 from robot import PinMode
@@ -52,7 +54,6 @@ elif zone == 3:
     leftWallMarkers = [36,37]
     rightWallMarkers = [40,41]
 
-##wrong way around
 rPow = -0.7
 lPow = -0.68
 
@@ -205,7 +206,6 @@ def BotchGetBack():
             inZone = False
 
 def BotchGetBlocks():
-
     armFrontClose()
     Forward(-5.8)
     Rotate(math.pi)
@@ -218,7 +218,6 @@ def BotchGetBlocks():
     time.sleep(0.7)
     Forward(0.2)
     goToNearestMarkerInVision(tokenMarkers)
-        
 
 def getWallMarkerZoneLeft(MarkerID):
     if MarkerID in range(0,7): 
@@ -232,40 +231,169 @@ def getWallMarkerZoneLeft(MarkerID):
     else:
         return errorMarkerID
 
-def getPosition():
-    wallMarkers = GetAllMarkersInVision(list(WALL))
-    if wallMarkers.count >=2:
+def returnToZone():
+    pos = getPositionAndRotation()
+	if pos[0] < 4 and pos[1] < 4:
+		goToPosition(2,1)
+		goToPosition(6,1)
+		goToPosition(7,3)
+		goToPosition(7,6)
+		goToPosition(5,5)
+		if zone = 2:
+			pos = getPositionAndRotation()
+			while(pos[0]-5)*(pos[0]-5) + (pos[1]-5)*(pos[1]-5) < 1:
+				goToPosition(5,5)
+				pos = getPositionAndRotation()
+		elif zone = 1:
+			pos = getPositionAndRotation()
+			while(pos[0]-5)*(pos[0]-5) + (pos[1]-3)*(pos[1]-3) < 1:
+				goToPosition(5,3)
+				pos = getPositionAndRotation()
+		elif zone = 3:
+			pos = getPositionAndRotation()
+			while(pos[0]-3)*(pos[0]-3) + (pos[1]-5)*(pos[1]-5) < 1:
+				goToPosition(3,5)
+				pos = getPositionAndRotation()
+	elif pos[0] > 4 and pos[1] < 4:
+		goToPosition(6,1)
+		goToPosition(2,1)
+		goToPosition(1,3)
+		goToPosition(1,6)
+		goToPosition(3,5)
+		if zone = 2:
+			pos = getPositionAndRotation()
+			while(pos[0]-5)*(pos[0]-5) + (pos[1]-5)*(pos[1]-5) < 1:
+				goToPosition(5,5)
+				pos = getPositionAndRotation()
+		elif zone = 0:
+			pos = getPositionAndRotation()
+			while(pos[0]-3)*(pos[0]-3) + (pos[1]-3)*(pos[1]-3) < 1:
+				goToPosition(3,3)
+				pos = getPositionAndRotation()
+		elif zone = 3:
+			pos = getPositionAndRotation()
+			while(pos[0]-3)*(pos[0]-3) + (pos[1]-5)*(pos[1]-5) < 1:
+				goToPosition(3,5)
+				pos = getPositionAndRotation()
+	elif pos[0] > 4 and pos[1] > 4:
+		goToPosition(7,6)
+		goToPosition(7,3)
+		goToPosition(6,1)
+		goToPosition(2,1)
+		goToPosition(3,3)
+		if zone = 2:
+			pos = getPositionAndRotation()
+			while(pos[0]-5)*(pos[0]-5) + (pos[1]-5)*(pos[1]-5) < 1:
+				goToPosition(5,5)
+				pos = getPositionAndRotation()
+		elif zone = 1:
+			pos = getPositionAndRotation()
+			while(pos[0]-5)*(pos[0]-5) + (pos[1]-3)*(pos[1]-3) < 1:
+				goToPosition(5,3)
+				pos = getPositionAndRotation()
+		elif zone = 3:
+			pos = getPositionAndRotation()
+			while(pos[0]-3)*(pos[0]-3) + (pos[1]-5)*(pos[1]-5) < 1:
+				goToPosition(3,5)
+				pos = getPositionAndRotation()
+	elif pos[0] < 4 and pos[1] > 4:
+		goToPosition(1,6)
+		goToPosition(1,3)
+		goToPosition(3,1)
+		goToPosition(6,1)
+		goToPosition(5,3)
+		if zone = 2:
+			pos = getPositionAndRotation()
+			while(pos[0]-5)*(pos[0]-5) + (pos[1]-5)*(pos[1]-5) < 1:
+				goToPosition(5,5)
+				pos = getPositionAndRotation()
+		elif zone = 1:
+			pos = getPositionAndRotation()
+			while(pos[0]-5)*(pos[0]-5) + (pos[1]-3)*(pos[1]-3) < 1:
+				goToPosition(5,3)
+				pos = getPositionAndRotation()
+		elif zone = 0:
+			pos = getPositionAndRotation()
+			while(pos[0]-5)*(pos[0]-5) + (pos[1]-5)*(pos[1]-5) < 1:
+				goToPosition(5,5)
+				pos = getPositionAndRotation()
+				
+def getPositionAndRotation():
+	time.sleep(0.4)
+    wallMarkers = GetAllMarkersInVision(list(WALL)+list(COLUMN))
+    if len(wallMarkers) >= 2:	
+		#markers
         markerA = wallMarkers[0]
         markerB = wallMarkers[1]
-        alpha = markerA.spheical.rot_y_radians
-        beta = markerB.spheical.rot_y_radians
-        a = markerA.spheical.distance_metres
-        b = markerB.spheical.distance_metres
+		#start info
+        alpha = markerA.spherical.rot_y_radians
+        beta = markerB.spherical.rot_y_radians
+        a = markerA.spherical.distance_metres
+        b = markerB.spherical.distance_metres
         Ax = GetWallMarkerX(markerA.id)
         Ay = GetWallMarkerY(markerA.id)
         Bx = GetWallMarkerX(markerB.id)
         By = GetWallMarkerY(markerB.id)
+		#derived info
         phi = beta-alpha
         BAx = Bx-Ax
         BAy = By-Ay
         magBA = BAx*BAx+BAy*BAy 
-
+		
+		print("phi=" + str(phi) + " a=" + str(a)+ " b=" + str(b))
+		print("A=("+str(Ax)+","+str(Ay)+") B=("+str(Bx)+","+str(By)+")")
+		
+		#angle calculation
         tanDelta = (b/a)*(1/math.sin(phi))-(1/math.tan(phi))
         sinDelta = tanDelta/math.sqrt((tanDelta*tanDelta)+1)
         cosDelta = 1//math.sqrt((tanDelta*tanDelta)+1)
-
+		
+		#unit vectors
         phatx = BAx/magBA
         phaty = BAy/magBA
         rhatx = -phaty
         rhaty = phatx
 
+		#robot position
         Rx = Bx + phatx*b*sinDelta + rhatx*b*cosDelta
         Ry = By + phaty*b*sinDelta + rhaty*b*cosDelta
-        return [Rx,Ry]
+		
+		#robot rotation
+		theta = beta - math.atan((Bx-Rx)/(By-Ry))
+        return [Rx,Ry,theta]
     else:
         Rotate(-1)
-        return getPosition()
+        return getPositionAndRotation()
 
+def sgn(t):
+	if t == 0:
+		return 0
+	else:
+		return t/math.abs(t)
+		
+def goToPosition(x1,y1):
+	print("going to ("+x1+","+y1+")")
+	pos = getPositionAndRotation()
+	#start info
+	x0 = pos[0]
+	y0 = pos[1]
+	theta = pos[2]
+	#derived info
+	deltay = y1-y0
+	deltax = x1-x0
+	#angle calculation
+	rotateAngle = theta + math.atan(deltay/deltax) + (sgn(deltax)*math.pi/2)
+	Rotate(rotateAngle)
+	#large angle error correction
+	if rotateAngle < math.pi/4:
+		dist = math.sqrt(deltax*deltax + deltay*deltay)
+		Forward(dist)
+		#large distance error correction
+		if dist > 1.5:
+			goToPosition
+	else:
+		goToPosition(x1,y1)
+		
 def GetWallMarkerX(markid):
     if markid in range(7,14):
         return 8
@@ -275,9 +403,32 @@ def GetWallMarkerX(markid):
         return (markid + 1)
     elif markid in range(14,21):
         return (21-markid)
+	elif markid in COLUMN:
+		#north
+		if markid in range(28,32):
+			return 4 + columnModifyX(markid-28)
+		#east
+		if markid in range(32,36):
+			return 6 + columnModifyX(markid-32)
+		#south
+		if markid in range(36,40):
+			return 4 + columnModifyX(markid-36)
+		#west
+		if markid in range(40,44):
+			return 2 + columnModifyX(markid-40)
     else:
         return errorMarkerDistance
 
+def columnModifyX(t):
+	if t==0:
+		return 0
+	elif t == 1:
+		return columnWidth/2
+	elif t == 2:
+		return 0
+	elif t == 3:
+		return -columnWidth/2
+		
 def GetWallMarkerY(markid):
     if markid in range(0,7):
         return 0
@@ -287,30 +438,31 @@ def GetWallMarkerY(markid):
         return (markid - 6)
     elif markid in range(21,28):
         return (28-markid)
+	elif markid in COLUMN:
+		#north
+		if markid in range(28,32):
+			return 2 + columnModifyY(markid-28)
+		#east
+		if markid in range(32,36):
+			return 4 + columnModifyY(markid-32)
+		#south
+		if markid in range(36,40):
+			return 6 + columnModifyY(markid-36)
+		#west
+		if markid in range(40,44):
+			return 4 + columnModifyY(markid-40)
     else:
         return errorMarkerDistance
-
-def returnToZone():
-    markers = r.camera.see()
-    markersNearZoneRight = []
-    markersNearZoneLeft = []
-    markersFarFromZone = []
-    if len(markers) != 0:
-        for x in markers:
-            if getWallMarkerZoneLeft(x.id) == zone:
-                markersNearZoneRight = markersNearZoneRight + [x]
-            if (getWallMarkerZoneLeft(x.id) +1)%4 == zone :
-                markersNearZoneLeft = markersNearZoneLeft + [x]
-            else:
-                markersFarFromZone = markersFarFromZone + [x]
-        if markersNearZoneRight.count != 0 or markersNearZoneLeft.count != 0:
-            pass        
-        else:
-            Rotate(-1)
-            returnToZone()
-    else:
-        Rotate(-1)
-        returnToZone()
+		
+def columnModifyY(t):
+	if t==0:
+		return -columnWidth/2
+	elif t == 1:
+		return 0
+	elif t == 2:
+		return columnWidth/2
+	elif t == 3:
+		return 0
 
 def armFrontClose():
     print("front")
@@ -327,7 +479,6 @@ def armFrontOpen():
     LeftArm.position = 0.4
     print("2open")
     time.sleep(0.1)
-
 
 def wallace():
     r.power_board.buzz(0.4, note='g')
@@ -364,10 +515,8 @@ def wallace():
     r.power_board.buzz(0.2, note='g')
     r.power_board.buzz(0.2, note='c')
 
-
 print("THIS IS TOTALLY RUNNING")
-
 
 BotchGetBlocks()
 Rotate(100 * math.pi / 180)
-BotchGetBack()
+returnToZone()
