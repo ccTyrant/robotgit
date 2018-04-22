@@ -1,9 +1,9 @@
-Script started on Wed Nov 29 02:37:12 2017
+Script started on Wed Nov 29 02:38:32 2017
 INFO:robot.robot:Robot (v2018.3.0) Initialising...
 INFO:robot.robot:New board found: '/var/robotd/power/SB_PB_O'
 INFO:robot.power:Waiting for start button.
 INFO:robot.robot:New board found: '/var/robotd/game/state'
-INFO:robot.robot:Recieved start signal in development mode, zone 0
+INFO:robot.robot:Recieved start signal in competition mode, zone 2
 INFO:robot.power:Starting user code.
 INFO:robot.robot:New board found: '/var/robotd/servo_assembly/8553130383035171D001'
 THIS IS TOTALLY RUNNING
@@ -11,3 +11,89 @@ front
 1close
 2close
 INFO:robot.robot:New board found: '/var/robotd/motor/SB_MCV4_C'
+forward -5.8 completed
+rotated 3.141592653589793 completed
+gotonearestmarker
+INFO:robot.robot:New board found: '/var/robotd/camera/video0'
+do you remember gucci gang gucci gang?
+54
+closing distance
+rotated 0.3720834276220475 completed
+forward 1.6387013291389922 completed
+54
+closing distance
+rotated 0.08986128671198622 completed
+forward 0.7131303222409155 completed
+I aint seen no markers
+front
+1open
+2open
+Forwarding till hit5.442994472497792
+I done hit the marker
+forward 0.3 completed
+front
+1close
+2close
+front
+1close
+2close
+front
+1close
+2close
+forward -2 completed
+forward 0.2 completed
+gotonearestmarker
+do you remember gucci gang gucci gang?
+54
+closing distance
+rotated -0.3245935668439991 completed
+forward 0.8270019488182024 completed
+54
+going for it
+rotated -0.0519234788277667 completed
+front
+1open
+2open
+Forwarding till hit0.7897584065986867
+I done hit the marker
+forward 0.3 completed
+front
+1close
+2close
+front
+1close
+2close
+front
+1close
+2close
+forward -2 completed
+closing distance
+rotated -0.3551629740741584 completed
+forward 1.1975656105558734 completed
+54
+closing distance
+rotated -0.07791659056151592 completed
+forward 0.5576205855395474 completed
+I aint seen no markers
+front
+1open
+2open
+Forwarding till hit5.566896748914286
+I done hit the marker
+forward 0.3 completed
+front
+1close
+2close
+front
+1close
+2close
+front
+1close
+2close
+rotated 1.7453292519943295 completed
+Traceback (most recent call last):
+  File "main.py", line 628, in <module>
+    moveToDesiredZone(zone)
+  File "main.py", line 400, in moveToDesiredZone
+    print("moving to zone " + desiredZone)
+TypeError: Can't convert 'int' object to str implicitly

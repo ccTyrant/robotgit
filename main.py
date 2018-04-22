@@ -45,7 +45,7 @@ elif zone == 1:
     rightWallMarkers = [35,34]
     
 elif zone == 2:
-    tokenMarkers =list(TOKEN_ZONE_2)
+    tokenMarkers = list(TOKEN_ZONE_2)
     leftWallMarkers = [32,35]
     rightWallMarkers = [36,39]
 
@@ -222,7 +222,7 @@ def BotchGetBlocks():
 def getWallMarkerZoneLeft(MarkerID):
     if MarkerID in range(0,7): 
         return 0
-    elif MarkerID in range (7,14):
+    elif MarkerID in range(7,14):
         return 1
     elif MarkerID in range(14,21):
         return 2
@@ -231,121 +231,122 @@ def getWallMarkerZoneLeft(MarkerID):
     else:
         return errorMarkerID
 
-def returnToZone():
-    pos = getPositionAndRotation()
-	if pos[0] < 4 and pos[1] < 4:
-		goToPosition(2,1)
-		goToPosition(6,1)
-		goToPosition(7,3)
-		goToPosition(7,6)
-		goToPosition(5,5)
-		if zone = 2:
-			pos = getPositionAndRotation()
-			while(pos[0]-5)*(pos[0]-5) + (pos[1]-5)*(pos[1]-5) < 1:
-				goToPosition(5,5)
-				pos = getPositionAndRotation()
-		elif zone = 1:
-			pos = getPositionAndRotation()
-			while(pos[0]-5)*(pos[0]-5) + (pos[1]-3)*(pos[1]-3) < 1:
-				goToPosition(5,3)
-				pos = getPositionAndRotation()
-		elif zone = 3:
-			pos = getPositionAndRotation()
-			while(pos[0]-3)*(pos[0]-3) + (pos[1]-5)*(pos[1]-5) < 1:
-				goToPosition(3,5)
-				pos = getPositionAndRotation()
-	elif pos[0] > 4 and pos[1] < 4:
-		goToPosition(6,1)
-		goToPosition(2,1)
-		goToPosition(1,3)
-		goToPosition(1,6)
-		goToPosition(3,5)
-		if zone = 2:
-			pos = getPositionAndRotation()
-			while(pos[0]-5)*(pos[0]-5) + (pos[1]-5)*(pos[1]-5) < 1:
-				goToPosition(5,5)
-				pos = getPositionAndRotation()
-		elif zone = 0:
-			pos = getPositionAndRotation()
-			while(pos[0]-3)*(pos[0]-3) + (pos[1]-3)*(pos[1]-3) < 1:
-				goToPosition(3,3)
-				pos = getPositionAndRotation()
-		elif zone = 3:
-			pos = getPositionAndRotation()
-			while(pos[0]-3)*(pos[0]-3) + (pos[1]-5)*(pos[1]-5) < 1:
-				goToPosition(3,5)
-				pos = getPositionAndRotation()
-	elif pos[0] > 4 and pos[1] > 4:
-		goToPosition(7,6)
-		goToPosition(7,3)
-		goToPosition(6,1)
-		goToPosition(2,1)
-		goToPosition(3,3)
-		if zone = 2:
-			pos = getPositionAndRotation()
-			while(pos[0]-5)*(pos[0]-5) + (pos[1]-5)*(pos[1]-5) < 1:
-				goToPosition(5,5)
-				pos = getPositionAndRotation()
-		elif zone = 1:
-			pos = getPositionAndRotation()
-			while(pos[0]-5)*(pos[0]-5) + (pos[1]-3)*(pos[1]-3) < 1:
-				goToPosition(5,3)
-				pos = getPositionAndRotation()
-		elif zone = 3:
-			pos = getPositionAndRotation()
-			while(pos[0]-3)*(pos[0]-3) + (pos[1]-5)*(pos[1]-5) < 1:
-				goToPosition(3,5)
-				pos = getPositionAndRotation()
-	elif pos[0] < 4 and pos[1] > 4:
-		goToPosition(1,6)
-		goToPosition(1,3)
-		goToPosition(3,1)
-		goToPosition(6,1)
-		goToPosition(5,3)
-		if zone = 2:
-			pos = getPositionAndRotation()
-			while(pos[0]-5)*(pos[0]-5) + (pos[1]-5)*(pos[1]-5) < 1:
-				goToPosition(5,5)
-				pos = getPositionAndRotation()
-		elif zone = 1:
-			pos = getPositionAndRotation()
-			while(pos[0]-5)*(pos[0]-5) + (pos[1]-3)*(pos[1]-3) < 1:
-				goToPosition(5,3)
-				pos = getPositionAndRotation()
-		elif zone = 0:
-			pos = getPositionAndRotation()
-			while(pos[0]-5)*(pos[0]-5) + (pos[1]-5)*(pos[1]-5) < 1:
-				goToPosition(5,5)
-				pos = getPositionAndRotation()
+
+#def returnToZone():
+#    pos = getPositionAndRotation()
+#    if pos[0] < 4 and pos[1] < 4:
+#	    goToPosition(2,1)
+#	    goToPosition(6,1)
+#	    goToPosition(7,3)
+#	    goToPosition(7,6)
+#	    goToPosition(5,5)
+#	    if zone = 2:
+#		    pos = getPositionAndRotation()
+#		    while(pos[0] - 5) * (pos[0] - 5) + (pos[1] - 5) * (pos[1] - 5) < 1:
+#			    goToPosition(5,5)
+#			    pos = getPositionAndRotation()
+#	    elif zone = 1:
+#		    pos = getPositionAndRotation()
+#		    while(pos[0] - 5) * (pos[0] - 5) + (pos[1] - 3) * (pos[1] - 3) < 1:
+#			    goToPosition(5,3)
+#			    pos = getPositionAndRotation()
+#	    elif zone = 3:
+#		    pos = getPositionAndRotation()
+#		    while(pos[0] - 3) * (pos[0] - 3) + (pos[1] - 5) * (pos[1] - 5) < 1:
+#			    goToPosition(3,5)
+#			    pos = getPositionAndRotation()
+#    elif pos[0] > 4 and pos[1] < 4:
+#	    goToPosition(6,1)
+#	    goToPosition(2,1)
+#	    goToPosition(1,3)
+#	    goToPosition(1,6)
+#	    goToPosition(3,5)
+#	    if zone = 2:
+#		    pos = getPositionAndRotation()
+#		    while(pos[0] - 5) * (pos[0] - 5) + (pos[1] - 5) * (pos[1] - 5) < 1:
+#			    goToPosition(5,5)
+#			    pos = getPositionAndRotation()
+#	    elif zone = 0:
+#		    pos = getPositionAndRotation()
+#		    while(pos[0] - 3) * (pos[0] - 3) + (pos[1] - 3) * (pos[1] - 3) < 1:
+#			    goToPosition(3,3)
+#			    pos = getPositionAndRotation()
+#	    elif zone = 3:
+#		    pos = getPositionAndRotation()
+#		    while(pos[0] - 3) * (pos[0] - 3) + (pos[1] - 5) * (pos[1] - 5) < 1:
+#			    goToPosition(3,5)
+#			    pos = getPositionAndRotation()
+#    elif pos[0] > 4 and pos[1] > 4:
+#	    goToPosition(7,6)
+#	    goToPosition(7,3)
+#	    goToPosition(6,1)
+#	    goToPosition(2,1)
+#	    goToPosition(3,3)
+#	    if zone = 2:
+#		    pos = getPositionAndRotation()
+#		    while(pos[0] - 5) * (pos[0] - 5) + (pos[1] - 5) * (pos[1] - 5) < 1:
+#			    goToPosition(5,5)
+#			    pos = getPositionAndRotation()
+#	    elif zone = 1:
+#		    pos = getPositionAndRotation()
+#		    while(pos[0] - 5) * (pos[0] - 5) + (pos[1] - 3) * (pos[1] - 3) < 1:
+#			    goToPosition(5,3)
+#			    pos = getPositionAndRotation()
+#	    elif zone = 3:
+#		    pos = getPositionAndRotation()
+#		    while(pos[0] - 3) * (pos[0] - 3) + (pos[1] - 5) * (pos[1] - 5) < 1:
+#			    goToPosition(3,5)
+#			    pos = getPositionAndRotation()
+#    elif pos[0] < 4 and pos[1] > 4:
+#	    goToPosition(1,6)
+#	    goToPosition(1,3)
+#	    goToPosition(3,1)
+#	    goToPosition(6,1)
+#	    goToPosition(5,3)
+#	    if zone = 2:
+#		    pos = getPositionAndRotation()
+#		    while(pos[0] - 5) * (pos[0] - 5) + (pos[1] - 5) * (pos[1] - 5) < 1:
+#			    goToPosition(5,5)
+#			    pos = getPositionAndRotation()
+#	    elif zone = 1:
+#		    pos = getPositionAndRotation()
+#		    while(pos[0] - 5) * (pos[0] - 5) + (pos[1] - 3) * (pos[1] - 3) < 1:
+#			    goToPosition(5,3)
+#			    pos = getPositionAndRotation()
+#	    elif zone = 0:
+#		    pos = getPositionAndRotation()
+#		    while(pos[0] - 5) * (pos[0] - 5) + (pos[1] - 5) * (pos[1] - 5) < 1:
+#			    goToPosition(5,5)
+#			    pos = getPositionAndRotation()
 
 #zones 0,1,2,3
 #dead zones 4,5,6,7
 def coordZone(x,y):
 	if x < 1:
-		if y>4:
+		if y > 4:
 			return 7
 		else:
 			return 4
 	elif x < 4:
-		if y<1:
+		if y < 1:
 			return 4
-		elif y<4:
+		elif y < 4:
 			return 0
-		elif y<7:
+		elif y < 7:
 			return 3
 		else:
 			return 7
 	elif x < 7:
-		if y<1:
+		if y < 1:
 			return 5
-		elif y<4:
+		elif y < 4:
 			return 1
-		elif y<7:
+		elif y < 7:
 			return 2
 		else:
 			return 6
 	else:
-		if y>4:
+		if y > 4:
 			return 6
 		else:
 			return 5
@@ -353,9 +354,10 @@ def coordZone(x,y):
 #like coordZone but no dead zones
 def coordCorner(x,y):
 	cZone = coordZone(x,y)
-	return (cZone%4)
+	return (cZone % 4)
 			
-#nodes: 0 = centre, 1=left (from centre of arena), 2=right (from centre of arena)
+#nodes: 0 = centre, 1=left (from centre of arena), 2=right (from centre of
+#arena)
 def goToNode(corner, node):
 	print("--going to corner " + corner + " node " + node)
 	if not node in range(0,3):
@@ -392,7 +394,7 @@ def goToNode(corner, node):
 		elif node == 2:
 			goToPosition(1,4.5)
 	else:
-		print("poo bum corner "+corner)
+		print("poo bum corner " + corner)
 	
 def moveToDesiredZone(desiredZone):
 	print("moving to zone " + desiredZone)
@@ -403,25 +405,25 @@ def moveToDesiredZone(desiredZone):
 	if currentCorner == desiredZone:
 		print("already in zone " + desiredZone)
 		goToNode(currentCorner, 0)
-	elif currentCorner == (desiredZone-1)%4:
-		print("Left of zone " + desiredZone + " in zone" + currentCorner+ ". Moving to desired zone")
+	elif currentCorner == (desiredZone - 1) % 4:
+		print("Left of zone " + desiredZone + " in zone" + currentCorner + ". Moving to desired zone")
 		goToNode(currentCorner,2)
 		goToNode(desiredZone,1)
 		goToNode(desiredZone,0)
-	elif currentCorner == (desiredZone+1)%4:
-		print("Right of zone " + desiredZone + " in zone" + currentCorner+ ". Moving to desired zone")
+	elif currentCorner == (desiredZone + 1) % 4:
+		print("Right of zone " + desiredZone + " in zone" + currentCorner + ". Moving to desired zone")
 		goToNode(currentCorner,1)
 		goToNode(desiredZone,2)
 		goToNode(desiredZone,0)
 	else:
-		print("in opposite zone to " + desiredZone + ", " + corner + ". Moving to zone " + (currentCorner-1)%4 + " and retrying")
+		print("in opposite zone to " + desiredZone + ", " + corner + ". Moving to zone " + (currentCorner - 1) % 4 + " and retrying")
 		goToNode(currentCorner,1)
-		goToNode((currentCorner-1)%4,2)
+		goToNode((currentCorner - 1) % 4,2)
 		moveToDesiredZone(desiredZone)
 	
 def getPositionAndRotation():
-	time.sleep(0.4)
-    wallMarkers = GetAllMarkersInVision(list(WALL)+list(COLUMN))
+    time.sleep(0.4)
+    wallMarkers = GetAllMarkersInVision(list(WALL) + list(COLUMN))
     if len(wallMarkers) >= 2:	
 		#markers
         markerA = wallMarkers[0]
@@ -436,32 +438,32 @@ def getPositionAndRotation():
         Bx = GetWallMarkerX(markerB.id)
         By = GetWallMarkerY(markerB.id)
 		#derived info
-        phi = beta-alpha
-        BAx = Bx-Ax
-        BAy = By-Ay
-        magBA = BAx*BAx+BAy*BAy 
-		
-		print("phi=" + str(phi) + " a=" + str(a)+ " b=" + str(b))
-		print("A=("+str(Ax)+","+str(Ay)+") B=("+str(Bx)+","+str(By)+")")
-		
+        phi = beta - alpha
+        BAx = Bx - Ax
+        BAy = By - Ay
+        magBA = BAx * BAx + BAy * BAy
+
+        print("phi=" + str(phi) + " a=" + str(a) + " b=" + str(b))
+        print("A=(" + str(Ax) + "," + str(Ay) + ") B=(" + str(Bx) + "," + str(By) + ")")
+
 		#angle calculation
-        tanDelta = (b/a)*(1/math.sin(phi))-(1/math.tan(phi))
-        sinDelta = tanDelta/math.sqrt((tanDelta*tanDelta)+1)
-        cosDelta = 1//math.sqrt((tanDelta*tanDelta)+1)
-		
+        tanDelta = (b / a)*(1 / math.sin(phi)) - (1 / math.tan(phi))
+        sinDelta = tanDelta / math.sqrt((tanDelta * tanDelta) + 1)
+        cosDelta = 1 // math.sqrt((tanDelta * tanDelta) + 1)
+
 		#unit vectors
-        phatx = BAx/magBA
-        phaty = BAy/magBA
+        phatx = BAx / magBA
+        phaty = BAy / magBA
         rhatx = -phaty
         rhaty = phatx
 
 		#robot position
-        Rx = Bx + phatx*b*sinDelta + rhatx*b*cosDelta
-        Ry = By + phaty*b*sinDelta + rhaty*b*cosDelta
-		
+        Rx = Bx + phatx * b * sinDelta + rhatx * b * cosDelta
+        Ry = By + phaty * b * sinDelta + rhaty * b * cosDelta
+
 		#robot rotation
-		theta = beta - math.atan((Bx-Rx)/(By-Ry))
-		print("position is ("+Rx + ","+Ry+") at angle "+theta)
+        theta = beta - math.atan((Bx - Rx) / (By - Ry))
+        print("position is (" + Rx + "," + Ry + ") at angle " + theta)
         return [Rx,Ry,theta]
     else:
         Rotate(-1)
@@ -471,24 +473,24 @@ def sgn(t):
 	if t == 0:
 		return 0
 	else:
-		return t/math.abs(t)
+		return t / math.abs(t)
 		
 def goToPosition(x1,y1):
-	print("-going to ("+x1+","+y1+")")
+	print("-going to (" + x1 + "," + y1 + ")")
 	pos = getPositionAndRotation()
 	#start info
 	x0 = pos[0]
 	y0 = pos[1]
 	theta = pos[2]
 	#derived info
-	deltay = y1-y0
-	deltax = x1-x0
+	deltay = y1 - y0
+	deltax = x1 - x0
 	#angle calculation
-	rotateAngle = theta + math.atan(deltay/deltax) + (sgn(deltax)*math.pi/2)
+	rotateAngle = theta + math.atan(deltay / deltax) + (sgn(deltax) * math.pi / 2)
 	Rotate(rotateAngle)
 	#large angle error correction
-	if rotateAngle < math.pi/4:
-		dist = math.sqrt(deltax*deltax + deltay*deltay)
+	if rotateAngle < math.pi / 4:
+		dist = math.sqrt(deltax * deltax + deltay * deltay)
 		Forward(dist)
 		#large distance error correction
 		if dist > 1.5:
@@ -506,32 +508,32 @@ def GetWallMarkerX(markid):
     elif markid in range(0,7):
         return (markid + 1)
     elif markid in range(14,21):
-        return (21-markid)
-	elif markid in COLUMN:
+        return (21 - markid)
+    elif markid in COLUMN:
 		#north
-		if markid in range(28,32):
-			return 4 + columnModifyX(markid-28)
+        if markid in range(28,32):
+            return 4 + columnModifyX(markid - 28)
 		#east
-		if markid in range(32,36):
-			return 6 + columnModifyX(markid-32)
+        if markid in range(32,36):
+            return 6 + columnModifyX(markid - 32)
 		#south
-		if markid in range(36,40):
-			return 4 + columnModifyX(markid-36)
+        if markid in range(36,40):
+            return 4 + columnModifyX(markid - 36)
 		#west
-		if markid in range(40,44):
-			return 2 + columnModifyX(markid-40)
+        if markid in range(40,44):
+            return 2 + columnModifyX(markid - 40)
     else:
         return errorMarkerDistance
 
 def columnModifyX(t):
-	if t==0:
+	if t == 0:
 		return 0
 	elif t == 1:
-		return columnWidth/2
+		return columnWidth / 2
 	elif t == 2:
 		return 0
 	elif t == 3:
-		return -columnWidth/2
+		return -columnWidth / 2
 		
 def GetWallMarkerY(markid):
     if markid in range(0,7):
@@ -541,46 +543,46 @@ def GetWallMarkerY(markid):
     elif markid in range(7,14):
         return (markid - 6)
     elif markid in range(21,28):
-        return (28-markid)
-	elif markid in COLUMN:
+        return (28 - markid)
+    elif markid in COLUMN:
 		#north
-		if markid in range(28,32):
-			return 2 + columnModifyY(markid-28)
+        if markid in range(28,32):
+            return 2 + columnModifyY(markid - 28)
 		#east
-		if markid in range(32,36):
-			return 4 + columnModifyY(markid-32)
+        if markid in range(32,36):
+            return 4 + columnModifyY(markid - 32)
 		#south
-		if markid in range(36,40):
-			return 6 + columnModifyY(markid-36)
+        if markid in range(36,40):
+            return 6 + columnModifyY(markid - 36)
 		#west
-		if markid in range(40,44):
-			return 4 + columnModifyY(markid-40)
+        if markid in range(40,44):
+            return 4 + columnModifyY(markid - 40)
     else:
         return errorMarkerDistance
-		
+
 def columnModifyY(t):
-	if t==0:
-		return -columnWidth/2
+	if t == 0:
+		return -columnWidth / 2
 	elif t == 1:
 		return 0
 	elif t == 2:
-		return columnWidth/2
+		return columnWidth / 2
 	elif t == 3:
 		return 0
 
 def armFrontClose():
     print("front")
-    RightArm.position = 0.4
+    RightArm.position = 0.3
     print("1close")
-    LeftArm.position = -0.5
+    LeftArm.position = -0.7
     print("2close")
     time.sleep(0.1)
 
 def armFrontOpen():
     print("front")
-    RightArm.position = -0.5
+    RightArm.position = -0.6
     print("1open")
-    LeftArm.position = 0.4
+    LeftArm.position = 0.2
     print("2open")
     time.sleep(0.1)
 
