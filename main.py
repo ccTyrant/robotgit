@@ -66,7 +66,7 @@ def Forward(dist):
     else:
         r.motor_board.m1 = -rPow
         r.motor_board.m0 = -lPow
-    time.sleep(abs(dist * fconst))
+    time.sleep(math.fabs(dist * fconst))
     r.motor_board.m1 = BRAKE
     r.motor_board.m0 = BRAKE
     print("forward " + str(dist) + " completed")
@@ -96,7 +96,7 @@ def Rotate(ang):
        else:
            r.motor_board.m1 = -rPow
            r.motor_board.m0 = lPow
-       time.sleep(abs(ang * const))
+       time.sleep(math.fabs(ang * const))
        r.motor_board.m1 = BRAKE
        r.motor_board.m0 = BRAKE
        print("rotated " + str(ang) + " completed")
@@ -476,7 +476,7 @@ def sgn(t):
 	if t == 0:
 		return 0
 	else:
-		return t / math.abs(t)
+		return t / math.fabs(t)
 		
 def goToPosition(x1,y1):
 	print("-going to (" + str(x1) + "," + str(y1) + ")")
