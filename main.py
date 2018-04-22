@@ -638,4 +638,4 @@ def wallace():
 
 print("THIS IS TOTALLY RUNNING")
 
-moveToDesiredZone(zone)
+BotchGetBlocks()
