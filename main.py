@@ -54,8 +54,8 @@ elif zone == 3:
     leftWallMarkers = [36,37]
     rightWallMarkers = [40,41]
 
-rPow = -0.7
-lPow = -0.68
+rPow = -0.65
+lPow = -0.65
 
 fconst = 2.2
 
@@ -151,6 +151,7 @@ def goToNearestMarkerInVision(IDWhitelist):
 def goToMarker(markerID):
     captured = False
     retried = False
+    alreadyClosed = False
     while not captured:
         markerSeen = False
         markers = r.camera.see()
@@ -166,6 +167,7 @@ def goToMarker(markerID):
                     print("closing distance")
                     Rotate(ourMarker.spherical.rot_y_radians)
                     Forward(ourMarker.spherical.distance_metres * 0.6)
+                    alreadyClosed = True
                 else:
                     print("going for it")
                     Rotate(ourMarker.spherical.rot_y_radians)
@@ -192,9 +194,19 @@ def goToMarker(markerID):
             if retried:
                 break
         else:
-            retried = True
-            print("notseen")
-            Forward(-0.6)
+            if alreadyClosed:
+                armFrontOpen()
+                if ForwardTillIRHit(1):
+                    time.sleep(0.5)
+                    Forward(0.3)
+                    armFrontClose()
+                    captured = True
+                else:
+                    break
+            else:  
+                retried = True
+                print("notseen")
+                Forward(-0.3)
     return captured
 
 def BotchGetBack():
@@ -372,43 +384,45 @@ def coordCorner(x,y):
 #nodes: 0 = centre, 1=left (from centre of arena), 2=right (from centre of
 #arena)
 def goToNode(corner, node):
-	print("--going to corner " + str(corner) + " node " + str(node))
-	if not node in range(0,3):
-		print("poo bum node " + node)
-	if corner == 0:
-		if node == 0:
-			goToPosition(2,2)
-		elif node == 1:
-			goToPosition(1,3.5)
-		elif node == 2:
-			goToPosition(3.5,1)
-			
-	elif corner == 1:
-		if node == 0:
-			goToPosition(6,2)
-		elif node == 1:
-			goToPosition(4.5,1)
-		elif node == 2:
-			goToPosition(1,3.5)
-			
-	elif corner == 2:
-		if node == 0:
-			goToPosition(6,6)
-		elif node == 1:
-			goToPosition(7,4.5)
-		elif node == 2:
-			goToPosition(4.5,7)
-			
-	elif corner == 3:
-		if node == 0:
-			goToPosition(2,6)
-		elif node == 1:
-			goToPosition(3.5,7)
-		elif node == 2:
-			goToPosition(1,4.5)
-	else:
-		print("poo bum corner " + str(corner))
-	
+    print("--going to corner " + str(corner) + " node " + str(node))
+    if not node in range(0,4):
+        print("poo bum node " + node)
+    if node == 4:
+        goToPosition(4,4)
+    elif corner == 0:
+        if node == 0:
+            goToPosition(2,2)
+        elif node == 1:
+            goToPosition(1,3.5)
+        elif node == 2:
+            goToPosition(3.5,1)
+            
+    elif corner == 1:
+        if node == 0:
+            goToPosition(6,2)
+        elif node == 1:
+            goToPosition(4.5,1)
+        elif node == 2:
+            goToPosition(1,3.5)
+        
+    elif corner == 2:
+        if node == 0:
+            goToPosition(6,6)
+        elif node == 1:
+            goToPosition(7,4.5)
+        elif node == 2:
+            goToPosition(4.5,7)
+        
+    elif corner == 3:
+        if node == 0:
+            goToPosition(2,6)
+        elif node == 1:
+            goToPosition(3.5,7)
+        elif node == 2:
+            goToPosition(1,4.5) 
+    else:
+        print("poo bum corner " + str(corner))
+
 def moveToDesiredZone(desiredZone):
 	print("moving to zone " + str(desiredZone))
 	pos = getPositionAndRotation()
@@ -454,7 +468,7 @@ def getPositionAndRotation():
         phi = beta - alpha
         BAx = Ax-Bx
         BAy = Ay-By
-        magBA = BAx * BAx + BAy * BAy
+        magBA = math.sqrt(BAx * BAx + BAy * BAy)
 
         print("phi=" + str(phi) + " a=" + str(a) + " b=" + str(b))
         print("A=(" + str(Ax) + "," + str(Ay) + ") B=(" + str(Bx) + "," + str(By) + ")")
