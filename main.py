@@ -227,7 +227,6 @@ def BotchGetBack():
                 inZone = True
         else:
             Rotate(35 * math.pi / 180)
-            Forward(2)
             inZone = False
 
 def BotchGetBlocks():
@@ -654,4 +653,5 @@ def wallace():
 print("THIS IS TOTALLY RUNNING")
 
 BotchGetBlocks()
-moveToDesiredZone(zone)
+rotate(math.pi)
+BotchGetBack()
