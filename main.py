@@ -454,7 +454,7 @@ def getPositionAndRotation():
     if len(wallMarkers) >= 2:	
 		#markers
         markerA = wallMarkers[0]
-        markerB = wallMarkers[1]
+        markerB = wallMarkers[len(wallMarkers)-1]
 		#start info
         alpha = markerA.spherical.rot_y_radians
         beta = markerB.spherical.rot_y_radians
