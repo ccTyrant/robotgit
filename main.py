@@ -70,7 +70,7 @@ def Forward(dist):
     r.motor_board.m1 = BRAKE
     r.motor_board.m0 = BRAKE
     print("forward " + str(dist) + " completed")
-    time.sleep(0.2)
+    time.sleep(0.3)
 
 def ForwardTillIRHit(maxDist):#returns true if the IR has gone off, false if maxdist reached
     endTime = time.time() + fconst * maxDist
@@ -639,3 +639,4 @@ def wallace():
 print("THIS IS TOTALLY RUNNING")
 
 BotchGetBlocks()
+moveToDesiredZone(zone)
