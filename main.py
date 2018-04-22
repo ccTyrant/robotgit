@@ -359,7 +359,7 @@ def coordCorner(x,y):
 #nodes: 0 = centre, 1=left (from centre of arena), 2=right (from centre of
 #arena)
 def goToNode(corner, node):
-	print("--going to corner " + corner + " node " + node)
+	print("--going to corner " + str(corner) + " node " + str(node))
 	if not node in range(0,3):
 		print("poo bum node " + node)
 	if corner == 0:
@@ -394,29 +394,29 @@ def goToNode(corner, node):
 		elif node == 2:
 			goToPosition(1,4.5)
 	else:
-		print("poo bum corner " + corner)
+		print("poo bum corner " + str(corner))
 	
 def moveToDesiredZone(desiredZone):
-	print("moving to zone " + desiredZone)
+	print("moving to zone " + str(desiredZone))
 	pos = getPositionAndRotation()
 	x = pos[0]
 	y = pos[1]
 	currentCorner = coordCorner(x,y)
 	if currentCorner == desiredZone:
-		print("already in zone " + desiredZone)
+		print("already in zone " + str(desiredZone))
 		goToNode(currentCorner, 0)
 	elif currentCorner == (desiredZone - 1) % 4:
-		print("Left of zone " + desiredZone + " in zone" + currentCorner + ". Moving to desired zone")
+		print("Left of zone " + str(desiredZone) + " in zone" + str(currentCorner) + ". Moving to desired zone")
 		goToNode(currentCorner,2)
 		goToNode(desiredZone,1)
 		goToNode(desiredZone,0)
 	elif currentCorner == (desiredZone + 1) % 4:
-		print("Right of zone " + desiredZone + " in zone" + currentCorner + ". Moving to desired zone")
+		print("Right of zone " + str(desiredZone) + " in zone" + str(currentCorner) + ". Moving to desired zone")
 		goToNode(currentCorner,1)
 		goToNode(desiredZone,2)
 		goToNode(desiredZone,0)
 	else:
-		print("in opposite zone to " + desiredZone + ", " + corner + ". Moving to zone " + (currentCorner - 1) % 4 + " and retrying")
+		print("in opposite zone to " + str(desiredZone) + ", " + str(currentCorner) + ". Moving to zone " + str((currentCorner - 1) % 4) + " and retrying")
 		goToNode(currentCorner,1)
 		goToNode((currentCorner - 1) % 4,2)
 		moveToDesiredZone(desiredZone)
@@ -462,8 +462,11 @@ def getPositionAndRotation():
         Ry = By + phaty * b * sinDelta + rhaty * b * cosDelta
 
 		#robot rotation
-        theta = beta - math.atan((Bx - Rx) / (By - Ry))
-        print("position is (" + Rx + "," + Ry + ") at angle " + theta)
+        if By-Ry != 0:
+            theta = beta - math.atan((Bx - Rx) / (By - Ry))
+        else:
+            theta = beta - math.pi/2
+        print("position is (" + str(Rx) + "," + str(Ry) + ") at angle " + str(theta))
         return [Rx,Ry,theta]
     else:
         Rotate(-1)
@@ -476,7 +479,7 @@ def sgn(t):
 		return t / math.abs(t)
 		
 def goToPosition(x1,y1):
-	print("-going to (" + x1 + "," + y1 + ")")
+	print("-going to (" + str(x1) + "," + str(y1) + ")")
 	pos = getPositionAndRotation()
 	#start info
 	x0 = pos[0]
@@ -623,6 +626,4 @@ def wallace():
 
 print("THIS IS TOTALLY RUNNING")
 
-BotchGetBlocks()
-Rotate(100 * math.pi / 180)
 moveToDesiredZone(zone)
