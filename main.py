@@ -191,9 +191,10 @@ def goToMarker(markerID):
                 armFrontClose()
             if retried:
                 break
-            else:
-                print("notseen")
-                Forward(-0.6)
+        else:
+            retried = True
+            print("notseen")
+            Forward(-0.6)
     return captured
 
 def BotchGetBack():
@@ -587,9 +588,9 @@ def columnModifyY(t):
 
 def armFrontClose():
     print("front")
-    RightArm.position = 0.5
+    RightArm.position = 0.6
     print("1close")
-    LeftArm.position = -0.9
+    LeftArm.position = -1.0
     print("2close")
     time.sleep(0.1)
 
