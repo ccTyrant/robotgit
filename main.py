@@ -317,7 +317,108 @@ def returnToZone():
 			while(pos[0]-5)*(pos[0]-5) + (pos[1]-5)*(pos[1]-5) < 1:
 				goToPosition(5,5)
 				pos = getPositionAndRotation()
-				
+
+#zones 0,1,2,3
+#dead zones 4,5,6,7
+def coordZone(x,y):
+	if x < 1:
+		if y>4:
+			return 7
+		else:
+			return 4
+	elif x < 4:
+		if y<1:
+			return 4
+		elif y<4:
+			return 0
+		elif y<7:
+			return 3
+		else:
+			return 7
+	elif x < 7:
+		if y<1:
+			return 5
+		elif y<4:
+			return 1
+		elif y<7:
+			return 2
+		else:
+			return 6
+	else:
+		if y>4:
+			return 6
+		else:
+			return 5
+			
+#like coordZone but no dead zones
+def coordCorner(x,y):
+	cZone = coordZone(x,y)
+	return (cZone%4)
+			
+#nodes: 0 = centre, 1=left (from centre of arena), 2=right (from centre of arena)
+def goToNode(corner, node):
+	print("--going to corner " + corner + " node " + node)
+	if not node in range(0,3):
+		print("poo bum node " + node)
+	if corner == 0:
+		if node == 0:
+			goToPosition(2,2)
+		elif node == 1:
+			goToPosition(1,3.5)
+		elif node == 2:
+			goToPosition(3.5,1)
+			
+	elif corner == 1:
+		if node == 0:
+			goToPosition(6,2)
+		elif node == 1:
+			goToPosition(4.5,1)
+		elif node == 2:
+			goToPosition(1,3.5)
+			
+	elif corner == 2:
+		if node == 0:
+			goToPosition(6,6)
+		elif node == 1:
+			goToPosition(7,4.5)
+		elif node == 2:
+			goToPosition(4.5,7)
+			
+	elif corner == 3:
+		if node == 0:
+			goToPosition(2,6)
+		elif node == 1:
+			goToPosition(3.5,7)
+		elif node == 2:
+			goToPosition(1,4.5)
+	else:
+		print("poo bum corner "+corner)
+	
+def moveToDesiredZone(desiredZone):
+	print("moving to zone " + desiredZone)
+	pos = getPositionAndRotation()
+	x = pos[0]
+	y = pos[1]
+	currentCorner = coordCorner(x,y)
+	if currentCorner == desiredZone:
+		print("already in zone " + desiredZone)
+		goToNode(currentCorner, 0)
+	elif currentCorner == (desiredZone-1)%4:
+		print("Left of zone " + desiredZone + " in zone" + currentCorner+ ". Moving to desired zone")
+		goToNode(currentCorner,2)
+		goToNode(desiredZone,1)
+		goToNode(desiredZone,0)
+	elif currentCorner == (desiredZone+1)%4:
+		print("Right of zone " + desiredZone + " in zone" + currentCorner+ ". Moving to desired zone")
+		goToNode(currentCorner,1)
+		goToNode(desiredZone,2)
+		goToNode(desiredZone,0)
+	else:
+		print("in opposite zone to " + desiredZone + ", " + corner + ". Moving to zone " + (currentCorner-1)%4 + " and retrying")
+		goToNode(currentCorner,1)
+		goToNode((currentCorner-1)%4,2)
+		moveToDesiredZone(desiredZone)
+	
 def getPositionAndRotation():
 	time.sleep(0.4)
     wallMarkers = GetAllMarkersInVision(list(WALL)+list(COLUMN))
@@ -360,6 +461,7 @@ def getPositionAndRotation():
 		
 		#robot rotation
 		theta = beta - math.atan((Bx-Rx)/(By-Ry))
+		print("position is ("+Rx + ","+Ry+") at angle "+theta)
         return [Rx,Ry,theta]
     else:
         Rotate(-1)
@@ -372,7 +474,7 @@ def sgn(t):
 		return t/math.abs(t)
 		
 def goToPosition(x1,y1):
-	print("going to ("+x1+","+y1+")")
+	print("-going to ("+x1+","+y1+")")
 	pos = getPositionAndRotation()
 	#start info
 	x0 = pos[0]
@@ -390,8 +492,10 @@ def goToPosition(x1,y1):
 		Forward(dist)
 		#large distance error correction
 		if dist > 1.5:
-			goToPosition
+			print("distance correction")
+			goToPosition(x1,y1)
 	else:
+		print("angle correction")
 		goToPosition(x1,y1)
 		
 def GetWallMarkerX(markid):
@@ -519,4 +623,4 @@ print("THIS IS TOTALLY RUNNING")
 
 BotchGetBlocks()
 Rotate(100 * math.pi / 180)
-returnToZone()
+moveToDesiredZone(zone)
