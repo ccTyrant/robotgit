@@ -1,4 +1,4 @@
-Script started on Wed Nov 29 02:37:12 2017
+Script started on Wed Nov 29 02:37:11 2017
 INFO:robot.robot:Robot (v2018.3.0) Initialising...
 INFO:robot.robot:New board found: '/var/robotd/power/SB_PB_O'
 INFO:robot.power:Waiting for start button.
@@ -7,57 +7,43 @@ INFO:robot.robot:Recieved start signal in development mode, zone 0
 INFO:robot.power:Starting user code.
 INFO:robot.robot:New board found: '/var/robotd/servo_assembly/8553130383035171D001'
 THIS IS TOTALLY RUNNING
-moving to zone 2
-INFO:robot.robot:New board found: '/var/robotd/camera/video0'
+front
+1close
+2close
 INFO:robot.robot:New board found: '/var/robotd/motor/SB_MCV4_C'
-rotated -1 completed
-phi=0.3519477436543213 a=3.375005014146081 b=3.6822629051568234
-A=(0,3) B=(0,2)
-position is (0.0,0.5116395503617102) at angle 0.28293469034903157
-in opposite zone to 2, 0. Moving to zone 3 and retrying
---going to corner 0 node 1
--going to (1,3.5)
-rotated -1 completed
-phi=0.3611479661470166 a=3.2350451976607104 b=3.7127593764012614
-A=(0,3) B=(0,2)
-position is (0.0,0.08869082297750941) at angle -0.07663337427366487
-rotated 2.7798055014309453 completed
-angle correction
--going to (1,3.5)
-rotated -1 completed
-rotated -1 completed
-rotated -1 completed
-phi=0.345370494397652 a=3.421196812238407 b=3.7662198893203382
-A=(0,3) B=(0,2)
-position is (0.0,0.3915541137201981) at angle 0.1856548234629109
-rotated 3.0159994265495147 completed
-angle correction
--going to (1,3.5)
-rotated -1 completed
-phi=-0.6369859998594712 a=3.527190616995395 b=4.179553841143785
-A=(3,0) B=(1,0)
-position is (2.1273506880970796,0.0) at angle -1.9978384774112228
-rotated -4.827824236452006 completed
-forward 3.677080305616531 completed
-distance correction
--going to (1,3.5)
-phi=-0.3588559373429572 a=4.380117790664879 b=4.728278008029889
-A=(0,7) B=(1,8)
-position is (0.10745937725733734,7.107459377257337) at angle -0.8564370051527858
-rotated -0.6138924819684353 completed
-forward 3.7162335666381026 completed
-distance correction
--going to (1,3.5)
-rotated -1 completed
-rotated -1 completed
-phi=-0.26777235188636106 a=2.073258201512786 b=3.0031735414688754
-A=(3,8) B=(4,8)
-position is (1.3646570477443718,8.0) at angle -1.8942479352958528
-rotated -1.9751061543194748 completed
-forward 4.514750797382912 completed
-distance correction
--going to (1,3.5)
-phi=0.38174024497012454 a=3.2599664190511874 b=3.3415583707166223
-A=(8,6) B=(8,7)
-position is (8.0,7.84207982800452) at angle 0.4561193927792562
-rotated -0.5594666164203272 completed
+forward -5.8 completed
+rotated 3.141592653589793 completed
+gotonearestmarker
+INFO:robot.robot:New board found: '/var/robotd/camera/video0'
+do you remember gucci gang gucci gang?
+54
+closing distance
+rotated -0.2835351504498447 completed
+forward 0.9656368912590482 completed
+notseen
+forward -0.6 completed
+54
+going for it
+rotated -0.24605829033522347 completed
+front
+1open
+2open
+Forwarding till hit1.016277629424777
+I NO hit marker
+gotonearestmarker
+do you remember gucci gang gucci gang?
+54
+going for it
+rotated -0.2461048421938972 completed
+front
+1open
+2open
+Forwarding till hit1.0143245645751338
+I NO hit marker
+gotonearestmarker
+do you remember gucci gang gucci gang?
+54
+going for it
+rotated -0.24612593402596622 completed
+front
+1open
