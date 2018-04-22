@@ -128,19 +128,29 @@ def GetNearestMarkerInVision(IDWhitelist):
     return errorMarkerID
 
 def goToNearestMarkerInVision(IDWhitelist):
-    print("gotonearestmarker")
-    markerID = GetNearestMarkerInVision(IDWhitelist)
-    if markerID != errorMarkerID:
-        print("do you remember gucci gang gucci gang?")
-        if goToMarker(markerID):
-            armFrontClose()
-    else:
-        Rotate(0.5)
-        time.sleep(0.5)
-        goToNearestMarkerInVision(IDWhitelist)
+    gotMarker = False
+    turnCount = 0
+    while not gotMarker:
+        print("gotonearestmarker")
+        markerID = GetNearestMarkerInVision(IDWhitelist)
+        if markerID != errorMarkerID:
+            print("do you remember gucci gang gucci gang?")
+            if goToMarker(markerID):
+                armFrontClose()
+                gotMarker = True
+        elif turnCount > 10:
+            Forward(-1)
+            Forward(0.4)
+            turnCount = 0
+        else:
+            Rotate(0.5)
+            time.sleep(0.5)
+            turnCount = turnCount + 1
+            goToNearestMarkerInVision(IDWhitelist)
 
 def goToMarker(markerID):
     captured = False
+    retried = False
     while not captured:
         markerSeen = False
         markers = r.camera.see()
@@ -179,9 +189,11 @@ def goToMarker(markerID):
                 else:
                     break
                 armFrontClose()
-        else:
-            print("notseen")
-            Forward(-0.5)
+            if retried:
+                break
+            else:
+                print("notseen")
+                Forward(-0.6)
     return captured
 
 def BotchGetBack():
@@ -439,8 +451,8 @@ def getPositionAndRotation():
         By = GetWallMarkerY(markerB.id)
 		#derived info
         phi = beta - alpha
-        BAx = Bx - Ax
-        BAy = By - Ay
+        BAx = Ax-Bx
+        BAy = Ay-By
         magBA = BAx * BAx + BAy * BAy
 
         print("phi=" + str(phi) + " a=" + str(a) + " b=" + str(b))
@@ -575,17 +587,17 @@ def columnModifyY(t):
 
 def armFrontClose():
     print("front")
-    RightArm.position = 0.3
+    RightArm.position = 0.5
     print("1close")
-    LeftArm.position = -0.7
+    LeftArm.position = -0.9
     print("2close")
     time.sleep(0.1)
 
 def armFrontOpen():
     print("front")
-    RightArm.position = -0.6
+    RightArm.position = -0.5
     print("1open")
-    LeftArm.position = 0.2
+    LeftArm.position = 0.0
     print("2open")
     time.sleep(0.1)
 
@@ -626,4 +638,4 @@ def wallace():
 
 print("THIS IS TOTALLY RUNNING")
 
-moveToDesiredZone(zone)
+BotchGetBlocks()
