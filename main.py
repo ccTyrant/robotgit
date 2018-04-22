@@ -13,7 +13,7 @@ if r.mode == GameMode.COMPETITION:
 else:
     zone = 2
 IRPin = 0
-
+starttime = time.time()
 errorMarkerID = 6969
 errorMarkerDistance = 4201337
 
@@ -54,7 +54,7 @@ elif zone == 3:
     leftWallMarkers = [36,37]
     rightWallMarkers = [40,41]
 
-rPow = -0.65
+rPow = -0.685
 lPow = -0.65
 
 fconst = 2.2
@@ -89,18 +89,48 @@ def ForwardTillIRHit(maxDist):#returns true if the IR has gone off, false if max
     return False
 
 def Rotate(ang):
-       const = 0.3
-       if ang < 0:
-           r.motor_board.m1 = rPow
-           r.motor_board.m0 = -lPow
-       else:
-           r.motor_board.m1 = -rPow
-           r.motor_board.m0 = lPow
-       time.sleep(math.fabs(ang * const))
-       r.motor_board.m1 = BRAKE
-       r.motor_board.m0 = BRAKE
-       print("rotated " + str(ang) + " completed")
-       time.sleep(0.2)
+    const = 0.31
+    medconst = 0.38
+    largeconst = 0.45
+    largerconst = 0.58
+    #0-30, 30-50, 50 - 80, >=80
+    if ang > 0 and ang < 0.523599:
+        r.motor_board.m0 = +rPow
+        r.motor_board.m1 = -lPow
+        time.sleep(math.fabs(ang)*const)
+    elif ang < 0 and ang > -523599:
+        r.motor_board.m0 = -rPow
+        r.motor_board.m1 = +lPow
+        time.sleep(math.fabs(ang)*const)
+    elif ang < 0.872655 and ang > 0:
+        r.motor_board.m0 = +rPow
+        r.motor_board.m1 = -lPow
+        time.sleep(math.fabs(ang)*medconst)
+    elif ang > -0.872655 and ang < 0:
+        r.motor_board.m0 = -rPow
+        r.motor_board.m1 = +lPow
+        time.sleep(math.fabs(ang)*medconst)
+    elif ang < 1.39626 and ang > 0:
+        r.motor_board.m0 = +rPow
+        r.motor_board.m1 = -lPow
+        time.sleep(math.fabs(ang)*largeconst)
+    elif ang > -1.39626 and ang  < 0:
+        r.motor_board.m0 = -rPow
+        r.motor_board.m1 = +lPow
+        time.sleep(math.fabs(ang)*largeconst)
+    elif ang >= 1.39626:
+        r.motor_board.m0 = +rPow
+        r.motor_board.m1 = -lPow
+        time.sleep(math.fabs(ang)*largerconst)
+    elif ang <= -1.39626:
+        r.motor_board.m0 = -rPow
+        r.motor_board.m1 = +lPow
+        time.sleep(math.fabs(ang)*largerconst)
+    r.motor_board.m0 = BRAKE
+    r.motor_board.m1 = BRAKE
+    print("Rotating" + str(ang))
+    time.sleep(0.8)
+
 
 def lookAndGo():
     markers = r.camera.see()
@@ -146,7 +176,28 @@ def goToNearestMarkerInVision(IDWhitelist):
             Rotate(0.5)
             time.sleep(0.5)
             turnCount = turnCount + 1
-            goToNearestMarkerInVision(IDWhitelist)
+            
+def checkTime():
+    if time.time() - starttime > 105:
+        while True:
+            moveToDesiredZone(zone)
+            pos = getPositionAndRotation()
+            if coordZone(pos[0], pos[1]) == zone:
+                stopRobot()
+
+
+def goToNearestMarkerInVision(IDWhitelist):
+    print("gotonearestmarker")
+    markerID = GetNearestMarkerInVision(IDWhitelist)
+    if markerID != errorMarkerID:
+        print("do you remember gucci gang gucci gang?")
+        if goToMarker(markerID):
+            armFrontClose()
+    else:
+        Rotate(0.5)
+        time.sleep(0.5)
+        checkTime()
+        goToNearestMarkerInVision(IDWhitelist)
 
 def goToMarker(markerID):
     captured = False
@@ -231,7 +282,7 @@ def BotchGetBack():
 
 def BotchGetBlocks():
     armFrontClose()
-    Forward(-5.8)
+    Forward(5.2)
     Rotate(math.pi)
     goToNearestMarkerInVision(tokenMarkers)
     Forward(-2)
@@ -346,33 +397,46 @@ def getWallMarkerZoneLeft(MarkerID):
 #zones 0,1,2,3
 #dead zones 4,5,6,7
 def coordZone(x,y):
+	print("getting zone for (" + str(x) + "," + str(y) + ")")
 	if x < 1:
 		if y > 4:
+			print("dead3")
 			return 7
 		else:
+			print("dead0")
 			return 4
 	elif x < 4:
 		if y < 1:
+			print("dead0")
 			return 4
 		elif y < 4:
+			print("zone0")
 			return 0
 		elif y < 7:
+			print("zone3")
 			return 3
 		else:
+			print("dead3")
 			return 7
 	elif x < 7:
 		if y < 1:
+			print("dead1")
 			return 5
 		elif y < 4:
+			print("zone1")
 			return 1
 		elif y < 7:
+			print("zone2")
 			return 2
 		else:
+			print("dead2")
 			return 6
 	else:
 		if y > 4:
+			print("dead2")
 			return 6
 		else:
+			print("dead1")
 			return 5
 			
 #like coordZone but no dead zones
@@ -465,18 +529,18 @@ def getPositionAndRotation():
         By = GetWallMarkerY(markerB.id)
 		#derived info
         phi = beta - alpha
-        BAx = Ax-Bx
-        BAy = Ay-By
-        magBA = math.sqrt(BAx * BAx + BAy * BAy)
+        BAx = Bx-Ax
+        BAy = By-Ay
+        magBA = math.sqrt((BAx * BAx) + (BAy * BAy))
 
         print("phi=" + str(phi) + " a=" + str(a) + " b=" + str(b))
         print("A=(" + str(Ax) + "," + str(Ay) + ") B=(" + str(Bx) + "," + str(By) + ")")
 
 		#angle calculation
-        tanDelta = (b / a)*(1 / math.sin(phi)) - (1 / math.tan(phi))
+        tanDelta = (b / (a*math.sin(phi))) - (1 / math.tan(phi))
         sinDelta = tanDelta / math.sqrt((tanDelta * tanDelta) + 1)
-        cosDelta = 1 // math.sqrt((tanDelta * tanDelta) + 1)
-
+        cosDelta = 1 / math.sqrt((tanDelta * tanDelta) + 1)
+        print("tanDelta="+str(tanDelta))
 		#unit vectors
         phatx = BAx / magBA
         phaty = BAy / magBA
@@ -484,8 +548,12 @@ def getPositionAndRotation():
         rhaty = -phatx
 
 		#robot position
-        Rx = Bx + phatx * b * sinDelta + rhatx * b * cosDelta
-        Ry = By + phaty * b * sinDelta + rhaty * b * cosDelta
+        if tanDelta < 0:
+            Rx = Bx + (phatx * b * sinDelta) + (rhatx * b * cosDelta)
+            Ry = By + (phaty * b * sinDelta) + (rhaty * b * cosDelta)
+        else:
+            Rx = Bx - (phatx * b * sinDelta) - (rhatx * b * cosDelta)
+            Ry = By - (phaty * b * sinDelta) -  (rhaty * b * cosDelta)
 
 		#robot rotation
         if By-Ry != 0:
@@ -495,7 +563,7 @@ def getPositionAndRotation():
         print("position is (" + str(Rx) + "," + str(Ry) + ") at angle " + str(theta))
         return [Rx,Ry,theta]
     else:
-        Rotate(-1)
+        Rotate(-1) 
         return getPositionAndRotation()
 
 def sgn(t):
@@ -516,7 +584,7 @@ def goToPosition(x1,y1):
 	deltax = x1 - x0
 	#angle calculation
 	rotateAngle = theta + math.atan(deltay / deltax) + (sgn(deltax) * math.pi / 2)
-	Rotate(rotateAngle)
+	Rotate(-rotateAngle)
 	#large angle error correction
 	if rotateAngle < math.pi / 4:
 		dist = math.sqrt(deltax * deltax + deltay * deltay)
@@ -650,8 +718,29 @@ def wallace():
     r.power_board.buzz(0.2, note='g')
     r.power_board.buzz(0.2, note='c')
 
-print("THIS IS TOTALLY RUNNING")
+def stopRobot():
+    r.motor_board.m1 = 0
+    r.motor_board.m0 = 0
+    while True:
+        time.sleep(1)
 
-BotchGetBlocks()
-rotate(math.pi)
-BotchGetBack()
+#Forward(5)
+#time.sleep(1.5)
+#Rotate(-math.pi/2)
+
+moveToDesiredZone(zone)
+
+#Rotate(math.pi)
+#time.sleep(4)
+#Rotate(math.pi/2)
+#time.sleep(4)
+#Rotate(math.pi/3)
+#time.sleep(4)
+
+#Rotate(math.pi/6)
+
+
+
+
+
+

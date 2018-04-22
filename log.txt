@@ -1,361 +1,66 @@
-Script started on Wed Nov 29 02:37:12 2017
+Script started on Wed Nov 29 02:37:11 2017
 INFO:robot.robot:Robot (v2018.3.0) Initialising...
 INFO:robot.robot:New board found: '/var/robotd/power/SB_PB_O'
 INFO:robot.power:Waiting for start button.
 INFO:robot.robot:New board found: '/var/robotd/game/state'
-INFO:robot.robot:Recieved start signal in competition mode, zone 3
+INFO:robot.robot:Recieved start signal in competition mode, zone 1
 INFO:robot.power:Starting user code.
 INFO:robot.robot:New board found: '/var/robotd/servo_assembly/8553130383035171D001'
-THIS IS TOTALLY RUNNING
-front
-1close
-2close
-INFO:robot.robot:New board found: '/var/robotd/motor/SB_MCV4_C'
-forward -5.8 completed
-rotated 3.141592653589793 completed
-gotonearestmarker
+moving to zone 1
 INFO:robot.robot:New board found: '/var/robotd/camera/video0'
-rotated 0.5 completed
-gotonearestmarker
-do you remember gucci gang gucci gang?
-I aint seen no markers
-front
-1open
-2open
-Forwarding till hit5.6397565528264435
-I NO hit marker
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-do you remember gucci gang gucci gang?
-60
-going for it
-rotated -0.0561426253667969 completed
-front
-1open
-2open
-Forwarding till hit1.0049884158248648
-I done hit the marker
-forward 0.3 completed
-front
-1close
-2close
-front
-1close
-2close
-front
-1close
-2close
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-62
-closing distance
-rotated 0.42708369899267473 completed
-forward 0.6536236388981805 completed
-I aint seen no markers
-front
-1open
-2open
-Forwarding till hit7.371158317710545
-I done hit the marker
-forward 0.3 completed
-front
-1close
-2close
-front
-1close
-2close
-front
-1close
-2close
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-do you remember gucci gang gucci gang?
-59
-going for it
-rotated -0.07276023917459322 completed
-front
-1open
-2open
-Forwarding till hit0.3857423611247696
-I done hit the marker
-forward 0.3 completed
-front
-1close
-2close
-front
-1close
-2close
-front
-1close
-2close
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-rotated 0.5 completed
-gotonearestmarker
-do you remember gucci gang gucci gang?
-63
-going for it
-rotated 0.021259727262723176 completed
-front
-1open
-2open
-Forwarding till hit0.6293232704218111
-I done hit the marker
-forward 0.3 completed
-front
-1close
-2close
-front
-1close
-2close
-front
-1close
-2close
-gotonearestmarker
-do you remember gucci gang gucci gang?
-63
-going for it
-rotated 0.08469186043377792 completed
-front
-1open
-2open
-Forwarding till hit0.44452616711232945
-I done hit the marker
-forward 0.3 completed
-front
-1close
-2close
-front
-1close
-2close
-front
-1close
-2close
-gotonearestmarker
-do you remember gucci gang gucci gang?
-63
-going for it
-rotated 0.0625664522426295 completed
-front
-1open
-2open
-Forwarding till hit0.43901208261883934
-I done hit the marker
-forward 0.3 completed
-front
-1close
-2close
-front
-1close
-2close
-front
-1close
-2close
-gotonearestmarker
-INFO:robot.game:Timeout 150s expired: Game over!
-Traceback (most recent call last):
-  File "main.py", line 655, in <module>
-    BotchGetBlocks()
-  File "main.py", line 236, in BotchGetBlocks
-    goToNearestMarkerInVision(tokenMarkers)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 149, in goToNearestMarkerInVision
-    goToNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 135, in goToNearestMarkerInVision
-    markerID = GetNearestMarkerInVision(IDWhitelist)
-  File "main.py", line 124, in GetNearestMarkerInVision
-    markers = r.camera.see()
-  File "/usr/lib/python3/dist-packages/robot/camera.py", line 72, in see
-    return self._see_to_results(self._receive(should_retry=True))
-  File "/usr/lib/python3/dist-packages/robot/board.py", line 133, in _receive
-    lambda: self._recv_from_socket(4096),
-  File "/usr/lib/python3/dist-packages/robot/board.py", line 83, in _socket_with_single_retry
-    return handler()
-  File "/usr/lib/python3/dist-packages/robot/board.py", line 133, in <lambda>
-    lambda: self._recv_from_socket(4096),
-  File "/usr/lib/python3/dist-packages/robot/board.py", line 121, in _recv_from_socket
-    data = self.socket.recv(size)
-KeyboardInterrupt
+phi=0.687179156231925 a=1.822897513221702 b=1.8460155741443116
+A=(0,6) B=(0,5)
+tanDelta=0.377772667503566
+position is (1.7268989715579943,5.652375230994628) at angle -0.7959063313838715
+getting zone for (1.7268989715579943,5.652375230994628)
+zone3
+in opposite zone to 1, 3. Moving to zone 2 and retrying
+--going to corner 3 node 1
+-going to (3.5,7)
+phi=0.6871852674618464 a=1.8241050127828249 b=1.8480078809691005
+A=(0,6) B=(0,5)
+tanDelta=0.3784409580128347
+position is (1.728380571756856,5.654089999386436) at angle -0.7952768741773943
+INFO:robot.robot:New board found: '/var/robotd/motor/SB_MCV4_C'
+Rotating1.4252035492686819
+angle correction
+-going to (3.5,7)
+phi=0.4967378766467103 a=5.106669880554639 b=6.090903491483286
+A=(0,1) B=(2,0)
+tanDelta=0.6580345532169438
+position is (1.2807924562443485,6.048292804715082) at angle 0.3817216597182161
+Rotating2.3576451091662536
+angle correction
+-going to (3.5,7)
+phi=-0.21171059956611094 a=3.7958355047252526 b=4.548896794473765
+A=(4,8) B=(5,8)
+tanDelta=-1.0503774198540388
+position is (1.7054082924077973,4.863421047217464) at angle -0.8589739299742446
+Rotating1.5839958394582128
+angle correction
+-going to (3.5,7)
+phi=-0.4832559247295621 a=1.9024062202851695 b=2.456401951487914
+A=(0,6) B=(0,7)
+tanDelta=-0.8731482938498285
+position is (1.8503278142534691,5.384389425921701) at angle 0.8011119244394355
+Rotating3.1468753497646116
+angle correction
+-going to (3.5,7)
+phi=-0.30758322246612796 a=4.86993543412768 b=8.589463453538812
+A=(5.815,4) B=(8,1)
+tanDelta=-2.6777506613380937
+position is (0.8336359936842777,5.7351989766705) at angle 1.083005542086117
+Rotating3.096723176418175
+angle correction
+-going to (3.5,7)
+phi=-0.4893741760811267 a=1.8865902410717372 b=2.434180709155715
+A=(0,6) B=(0,7)
+tanDelta=-0.8671553368330078
+position is (1.8390389359688823,5.405267572030887) at angle 0.7931929194592742
+Rotating3.1290478097909857
+angle correction
+-going to (3.5,7)
+phi=-0.3049794113332675 a=4.888794435805872 b=8.643024799343086
+A=(5.815,4) B=(8,1)
+tanDelta=-2.7111029043147097
+position is (0.8082471229998438,5.793805194020674) at angle 1.0812071711088436
